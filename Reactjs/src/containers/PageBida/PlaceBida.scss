@@ -1,0 +1,91 @@
+.place {
+    background: url("https://warningzone.com/wp-content/uploads/2020/10/map-wnz-website@300x-2.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 760px;
+    text-align: center;
+    padding: 100px 0 200px;
+}
+
+.place-container-logo {
+    background: url("https://warningzone.com/wp-content/plugins/warningzone/assets/images/heading-bg.jpg") repeat-x;
+    display: inline-block;
+    position: relative;
+    padding: 18px 20px;
+    background-size: auto;
+    min-width: 250px;
+    cursor: pointer;
+}
+
+.place-container-logo h3 {
+    font-size: 20px;
+    color: #212020;
+    font-weight: 600;
+}
+
+.place-container-logo .dot-before {
+    position: absolute;
+    content: '';
+    background: #000000;
+    width: 7px;
+    height: 7px;
+    top: calc(50% - 3px);
+    left: 8px;
+    border-radius: 50%;
+}
+
+.place-container-logo .dot-after {
+    position: absolute;
+    content: '';
+    background: #000000;
+    width: 7px;
+    height: 7px;
+    top: calc(50% - 3px);
+    right: 8px;
+    border-radius: 50%;
+}
+
+.place-container-content {
+    margin-top: 40px;
+    display: flex;
+    flex: 20%;
+    gap: 40px;
+    max-width: 1140px;
+    margin-right: auto;
+    margin-left: auto;
+    letter-spacing: 1px;
+    text-align: left;
+}
+
+.place-container-content ul {
+    color: #FFBA00;
+    list-style-type: disc;
+}
+
+.place-container-content h3 {
+    color: #FFBA00;
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.place-container-content ul li {
+    letter-spacing: 3px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.place-more {
+    background: url("https://warningzone.com/wp-content/themes/oceanwp-child-theme-master/assets/images/ic-btn-explore.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+}
+
+.place-more a {
+    color: #FFBA00;
+    font-size: 12px;
+    text-align: left;
+    padding-right: 44px;
+}

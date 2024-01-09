@@ -1,0 +1,97 @@
+.header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: #141414;
+    height: 72px;
+    padding-top: 12px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 24px 0 24px;
+}
+
+.header .header-logo a {
+    font-family: 'Agbalumo';
+    font-size: 32px;
+    color: #FFBA00;
+    font-weight: 600;
+}
+
+.header .header-logo a span {
+    color: red;
+}
+
+.header .header-logo a .span3 {
+    color: rgb(0, 90, 168);
+}
+
+.header .header-logo a .span2 {
+    color: rgb(0, 168, 90);
+}
+
+.header .header-logo a .span1 {
+    color: rgb(255, 255, 255);
+}
+
+.header .header-nav ul {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.header-contact {
+    font-weight: 500;
+    color: #FFBA00;
+    display: flex;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.header-contact a i {
+    color: #FFBA00;
+    font-size: 20px;
+}
+
+.header-nav ul li a:hover {
+    color: #FFBA00;
+}
+
+.header-nav a {
+    background-image: linear-gradient( to right, #FFBA00, #FFBA00 50%, #ffffff 50%);
+    background-size: 200% 100%;
+    background-position: -100%;
+    display: inline-block;
+    padding: 5px 0;
+    position: relative;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease-in-out;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.header-nav a:before {
+    content: '';
+    background: #FFBA00;
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    transition: all 0.3s ease-in-out;
+}
+
+.header-nav a:hover {
+    background-position: 0;
+}
+
+.header-nav a:hover::before {
+    width: 100%;
+}

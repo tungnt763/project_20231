@@ -1,0 +1,121 @@
+.home-img {
+    background-image: url("https://noithatkendesign.vn/storage/app/media/uploaded-files/thiet-ke-quan-bi-da-6.jpg");
+    height: 680px;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-content-desc {
+    margin-top: -240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-img .home-content h1 {
+    font-size: 4em;
+    font-weight: 700;
+    color: #FFBA00;
+    letter-spacing: 5px;
+}
+
+.home-img .home-content button {
+    margin-top: 46px;
+    font-size: 20px;
+    font-weight: 400px;
+    line-height: 30px;
+    padding: 10px 60px;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    cursor: pointer;
+    background-color: #FFBA00;
+    color: black;
+}
+
+.home-img .home-content button:hover {
+    color: #FFBA00;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: #FFBA00;
+}
+
+.btn {
+    width: 170px;
+    height: auto;
+    margin-top: 46px;
+    margin-left: 1px;
+    padding: 10px 0;
+    border-radius: 0;
+    text-align: center;
+    float: left;
+    cursor: pointer;
+    background: #FFBA00;
+    position: relative;
+}
+
+.btn p {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.BorderTopBottom:before {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 3px;
+    top: -6px;
+    left: -7px;
+    background: #fff;
+    transition: all 0.5s ease;
+}
+
+.BorderTopBottom:after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 3px;
+    bottom: -6px;
+    right: -7px;
+    background: #fff;
+    transition: all 0.5s ease;
+}
+
+.BorderLeftRight:before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -7px;
+    width: 3px;
+    height: 25px;
+    background: #fff;
+    transition: all 0.5s ease;
+}
+
+.BorderLeftRight:after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    right: -7px;
+    width: 3px;
+    height: 25px;
+    background: #fff;
+    transition: all 0.5s ease;
+}
+
+.btn:hover .BorderTopBottom:before,
+.btn:hover .BorderTopBottom:after {
+    width: 184px;
+    transition: all 0.5s ease;
+}
+
+.btn:hover .BorderLeftRight:before,
+.btn:hover .BorderLeftRight:after {
+    height: 57px;
+    transition: all 0.5s ease;
+}
