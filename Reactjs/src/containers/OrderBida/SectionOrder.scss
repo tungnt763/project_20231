@@ -494,7 +494,8 @@ button {
     border: 2px solid var(--primary-orange);
 }
 
-button:hover {
+button:hover,
+.button-selected {
     background-color: var(--primary-orange);
     color: #000;
 }

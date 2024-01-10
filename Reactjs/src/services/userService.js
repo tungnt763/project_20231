@@ -27,4 +27,8 @@ const editUserService = (inputData) => {
     return axios.put('/api/edit-user', inputData)
 }
 
+const bookingUserService = (info) => {
+    return axios.post('/api/booking-table', info)
+}
+
 export { handleLoginApi, getAllUsers, createNewUserService, deleteUserService, editUserService }

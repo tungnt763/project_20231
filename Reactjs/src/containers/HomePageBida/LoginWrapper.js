@@ -20,7 +20,6 @@ class LoginWrapper extends Component {
         this.setState({
             ...copyState
         });
-        console.log(this.state, id)
     }
 
     handleShowHidePassword = () => {

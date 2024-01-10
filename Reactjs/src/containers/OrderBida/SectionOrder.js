@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { path } from '../../utils';
+import { bookingUserService } from '../../services/userService';
 import './SectionOrder.scss';
 
 class SectionOrder extends Component {
@@ -9,12 +9,19 @@ class SectionOrder extends Component {
         super(props);
 
         this.state = {
+            fullName: '',
+            phoneNumber: '',
             isSelectedRoom: [false, false, false],
             dateOfTime: [new Date(), new Date(new Date().getTime() + 24 * 60 * 60 * 1000), new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000)],
             isSelectedDate: [false, false, false],
+            isSelectedTime: Array(15).fill(false),
+            address: ["", "1 Ngõ 72 Trần Đại Nghĩa", "47 Thái Hà, Trung Liệt", "352 Giải Phóng, Phương Liệt", "86 Ngõ Giếng, Hoàng Cầu", "269 Kim Ngưu, Hai Bà Trưng", "139 Lò Đúc, Hai Bà Trưng", "Số 1 Đại Cồ Việt"
+            , "72 Lý Tự Trọng, Quận 1", "2864 Phạm Thế Hiển, Quận 8", "175b Cao Thắng, Quận 10", "7WM5+P8H, Trường Yên, Hoa Lư", "Cù Chính Lan, Nhật Tân", "23 Bàu Sen, Hòa Hiếu, TX. Thái Hòa", "433 Phủ Qùy, Hòa Hiếu, TX. Thái Hòa",
+            "139 Đường 1/5 - TT, Nghĩa Đàn", "E-07, KPTM Vinpearl Hòn Tre, Phường Vĩnh Nguyên"],
+            addressSelected: "",
         }
 
-        console.log(this.state.dateOfTime)
+        // console.log(this.state.isSelectedTime)
     }
     
     handleSelectedRoom = (id) => {
@@ -28,6 +35,7 @@ class SectionOrder extends Component {
         else {
             copyState.isSelectedDate = [false, false, false];
         }
+        copyState.isSelectedTime = Array(15).fill(false);
         this.setState({
             ...copyState
         });
@@ -38,12 +46,56 @@ class SectionOrder extends Component {
         copyState.isSelectedDate[id] = true;
         copyState.isSelectedDate[(id + 1) % 3] = false;
         copyState.isSelectedDate[(id + 2) % 3] = false;
+        copyState.isSelectedTime = Array(15).fill(false);
         this.setState({
             ...copyState
         });
     }
 
+    handleSelectedTime = (id) => {
+        let copyState = {...this.state}, cnt = 0;
+        copyState.isSelectedTime[id] = !copyState.isSelectedTime[id];
+        // copyState.isSelectedDate[(id + 1) % 3] = false;
+        // copyState.isSelectedDate[(id + 2) % 3] = false;
+        let firstIndex = copyState.isSelectedTime.indexOf(true);
+        let lastIndex = copyState.isSelectedTime.lastIndexOf(true);
+        if (copyState.isSelectedTime[id]) {
+            for (let i = firstIndex; i <= lastIndex; i++)
+                copyState.isSelectedTime[i] = true;
+        }
+        else {
+            for (let i = firstIndex; i <= lastIndex; i++)
+                if (i <= id) copyState.isSelectedTime[i] = true;
+                else 
+                    copyState.isSelectedTime[i] = false;
+        }
+        console.log(firstIndex, lastIndex, copyState.isSelectedTime)
+        this.setState({
+            ...copyState
+        });
+    }
+
+    handleSelectedAddress = (event) => {
+        let copyState = {...this.state};
+        copyState.addressSelected = event.target.value;
+        this.setState({
+            ...copyState
+        });
+    }
+
+    handleOnChangeInput = (event, id) => {
+        let copyState = {...this.state};
+        copyState[id] = event.target.value;
+        this.setState({
+            ...copyState
+        });
+        console.log(this.state)
+    }
+
     render() {
+        let isSelectedTime = this.state.isSelectedTime;
+        let address = this.state.address;
+        // console.log(this.state);
         return ( 
             <React.Fragment>
                 <section class="section1">
@@ -59,7 +111,7 @@ class SectionOrder extends Component {
                             <div>
                                 <div class="name-inf">
                                     <label>Họ tên *</label>
-                                    <input type="text" class="name-input" required aria-required="true" />
+                                    <input type="text" class="name-input" onChange={(event) => {this.handleOnChangeInput(event, "fullName")}} required aria-required="true" />
                                 </div>
                                 <div class="div-extend-name"></div>
                             </div>
@@ -67,7 +119,7 @@ class SectionOrder extends Component {
                             <div>
                                 <div class="phone-inf">
                                     <label>Số điện thoại *</label>
-                                    <input type="tel" class="phone-input" required aria-required="true"
+                                    <input type="tel" class="phone-input" onChange={(event) => {this.handleOnChangeInput(event, "phoneNumber")}}required aria-required="true"
                                     title="Vui lòng nhập số điện thoại theo định dạng 10 số." />
                                 </div>
                                 <div class="div-extend-phone"></div>
@@ -78,29 +130,34 @@ class SectionOrder extends Component {
                                     <label>Chọn chi nhánh *</label>
                                     <div class="elementor-field elementor-select-wrapper ">
                                         <select name="form_fields[name]" id="myselect" class="location-select" required="required"
-                                        aria-required="true">
-                                        <option value=""></option>
-                                        <option value="1 Ngõ 72 Trần Đại Nghĩa">1 Ngõ 72 Trần Đại Nghĩa, Hai Bà Trưng, Hà Nội</option>
-                                        <option value="47 Thái Hà, Trung Liệt">47 Thái Hà, Trung Liệt, Đống Đa, Hà Nội</option>
-                                        <option value="352 Giải Phóng, Phương Liệt">352 Giải Phóng,Phương Liệt, Thanh Xuân,Hà Nội</option>
-                                        <option value="86 Ngõ Giếng, Hoàng Cầu">86 Ngõ Giếng, Hoàng Cầu, Hà Nội</option>
-                                        <option value="269 Kim Ngưu, Hai Bà Trưng">269 Kim Ngưu, Hai Bà Trưng, Hà Nội</option>
-                                        <option value="139 Lò Đúc, Hai Bà Trưng">139 Lò Đúc, Hai Bà Trưng,Hà Nội</option>
-                                        <option value="Số 1 Đại Cồ Việt">Số 1 Đại Cồ Việt,Hai Bà Trưng, Hà Nội</option>
-                                        <option value="72 Lý Tự Trọng, Quận 1">72 Lý Tự Trọng, Quận 1, Thành phố Hồ Chí Minh</option>
-                                        <option value="2864 Phạm Thế Hiển, Quận 8">2864 Phạm Thế Hiển, Phường 7, Quận 8, Thành phố Hồ Chí Minh
-                                        </option>
-                                        <option value="175b Cao Thắng, Quận 10">175b Cao Thắng, Phường 12, Quận 10, Thành phố Hồ Chí Minh
-                                        </option>
-                                        <option value="7WM5+P8H, Trường Yên, Hoa Lư">7WM5+P8H, Trường Yên, Hoa Lư, Ninh Bình</option>
-                                        <option value="Cù Chính Lan, Nhật Tân">Cù Chính Lan, Nhật Tân, Ninh Bình</option>
-                                        <option value="23 Bàu Sen, Hòa Hiếu, TX. Thái Hòa">23 Bàu Sen, Hòa Hiếu, TX. Thái Hòa, Nghệ An
-                                        </option>
-                                        <option value="433 Phủ Qùy, Hòa Hiếu, TX. Thái Hòa">433 Phủ Qùy, Hòa Hiếu, TX. Thái Hòa, Nghệ An
-                                        </option>
-                                        <option value="139 Đường 1/5 - TT, Nghĩa Đàn">139 Đường 1/5 - TT, Nghĩa Đàn, Nghệ An</option>
-                                        <option value="E-07, KPTM Vinpearl Hòn Tre, Phường Vĩnh Nguyên">E-07, KPTM Vinpearl Hòn Tre, Phường
-                                            Vĩnh Nguyên, Tp. Nha Trang, Tỉnh Khánh Hoà</option>
+                                        aria-required="true" value={this.state.addressSelected} onChange={(event) => {this.handleSelectedAddress(event)}}>
+                                            { address.map((item, index) => {
+                                                return (
+                                                    <option value={item}>{item}</option>
+                                                )
+                                            })}
+                                            {/* <option value=""></option>
+                                            <option value="1 Ngõ 72 Trần Đại Nghĩa">1 Ngõ 72 Trần Đại Nghĩa, Hai Bà Trưng, Hà Nội</option>
+                                            <option value="47 Thái Hà, Trung Liệt">47 Thái Hà, Trung Liệt, Đống Đa, Hà Nội</option>
+                                            <option value="352 Giải Phóng, Phương Liệt">352 Giải Phóng,Phương Liệt, Thanh Xuân,Hà Nội</option>
+                                            <option value="86 Ngõ Giếng, Hoàng Cầu">86 Ngõ Giếng, Hoàng Cầu, Hà Nội</option>
+                                            <option value="269 Kim Ngưu, Hai Bà Trưng">269 Kim Ngưu, Hai Bà Trưng, Hà Nội</option>
+                                            <option value="139 Lò Đúc, Hai Bà Trưng">139 Lò Đúc, Hai Bà Trưng,Hà Nội</option>
+                                            <option value="Số 1 Đại Cồ Việt">Số 1 Đại Cồ Việt,Hai Bà Trưng, Hà Nội</option>
+                                            <option value="72 Lý Tự Trọng, Quận 1">72 Lý Tự Trọng, Quận 1, Thành phố Hồ Chí Minh</option>
+                                            <option value="2864 Phạm Thế Hiển, Quận 8">2864 Phạm Thế Hiển, Phường 7, Quận 8, Thành phố Hồ Chí Minh
+                                            </option>
+                                            <option value="175b Cao Thắng, Quận 10">175b Cao Thắng, Phường 12, Quận 10, Thành phố Hồ Chí Minh
+                                            </option>
+                                            <option value="7WM5+P8H, Trường Yên, Hoa Lư">7WM5+P8H, Trường Yên, Hoa Lư, Ninh Bình</option>
+                                            <option value="Cù Chính Lan, Nhật Tân">Cù Chính Lan, Nhật Tân, Ninh Bình</option>
+                                            <option value="23 Bàu Sen, Hòa Hiếu, TX. Thái Hòa">23 Bàu Sen, Hòa Hiếu, TX. Thái Hòa, Nghệ An
+                                            </option>
+                                            <option value="433 Phủ Qùy, Hòa Hiếu, TX. Thái Hòa">433 Phủ Qùy, Hòa Hiếu, TX. Thái Hòa, Nghệ An
+                                            </option>
+                                            <option value="139 Đường 1/5 - TT, Nghĩa Đàn">139 Đường 1/5 - TT, Nghĩa Đàn, Nghệ An</option>
+                                            <option value="E-07, KPTM Vinpearl Hòn Tre, Phường Vĩnh Nguyên">E-07, KPTM Vinpearl Hòn Tre, Phường
+                                                Vĩnh Nguyên, Tp. Nha Trang, Tỉnh Khánh Hoà</option> */}
                                         </select>
                                     </div>
                                 </div>
@@ -168,24 +225,11 @@ class SectionOrder extends Component {
 
                                 <div id="content">
                                     <div id="one">
-                                        <button id="9">8h-9h</button>
-                                        <button id="10">9h-10h</button>
-                                        <button id="11">10h-11h</button>
-                                        <button id="12">11h-12h</button>
-                                        <button id="13">12h-13h</button>
-
-                                        <button id="14">13h-14h</button>
-                                        <button id="15">14h-15h</button>
-                                        <button id="16">15h-16h</button>
-                                        <button id="17">16h-17h</button>
-                                        <button id="18">17h-18h</button>
-
-                                        <button id="19">18h-19h</button>
-                                        <button id="20">19h-20h</button>
-                                        <button id="21">20h-21h</button>
-                                        <button id="22">21h-22h</button>
-                                        <button id="23">22h-23h</button>
-
+                                        { isSelectedTime.map((item, index) => {
+                                            return (
+                                                !item ? <button onClick={() => {this.handleSelectedTime(index)}}>{(index + 8) + "h-" + (index + 9) + "h"}</button> : <button onClick={() => {this.handleSelectedTime(index)}} class="button-selected">{(index + 8) + "h-" + (index + 9) + "h"}</button>
+                                            )
+                                        })}
                                     </div>
                                 </div>
                             </div>
