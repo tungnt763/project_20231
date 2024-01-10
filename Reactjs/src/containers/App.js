@@ -19,7 +19,8 @@ import System from '../routes/System';
 
 import { CustomToastCloseButton } from '../components/CustomToast';
 import ConfirmModal from '../components/ConfirmModal';
-import HomePageBida from './PageBida/HomePageBida.js'
+import HomePageBida from './HomePageBida/HomePageBida.js'
+import OrderPageBida from './OrderBida/OrderPageBida.js';
 
 class App extends Component {
 
@@ -52,7 +53,8 @@ class App extends Component {
                                 <Route path={path.HOME} exact component={(Home)} />
                                 <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                 <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
-                                <Route path={path.HOMEPAGE} component={HomePageBida} />
+                                <Route path={path.ORDER} component={(OrderPageBida)} />
+                                <Route path={path.HOMEPAGE} component={(HomePageBida)} />
                             </Switch>
                         </span>
 

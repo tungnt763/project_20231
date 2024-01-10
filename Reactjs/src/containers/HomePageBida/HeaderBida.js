@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './HeaderBida.scss';
+import { path } from '../../utils'
 
 class HeaderBida extends Component {
 
@@ -18,11 +19,11 @@ class HeaderBida extends Component {
                 <header className="header">
                     <div className="header-container">
                         <div className="header-logo">
-                            <a href="./index.html">B<span className="span1">I</span>D<span className="span2">A</span> H<span>U</span>S<span className="span3">T</span></a>
+                            <a href={"." + path.HOME}>B<span className="span1">I</span>D<span className="span2">A</span> H<span>U</span>S<span className="span3">T</span></a>
                         </div>
                         <div className="header-nav">
                             <ul>
-                                <li className="sparkle u-hover--sparkle"><a href="./order.html">Đặt bàn</a></li>
+                                <li className="sparkle u-hover--sparkle"><a href={"." + path.ORDER}>Đặt bàn</a></li>
                                 <li className="sparkle u-hover--sparkle"><a href="./location.html">Địa điểm</a></li>
                                 <li className="sparkle u-hover--sparkle"><a href="#">Loại bàn</a></li>
                                 <li className="sparkle u-hover--sparkle"><a href="./news.html">Tin tức</a></li>
