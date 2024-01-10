@@ -23,10 +23,10 @@ class SectionOrder extends Component {
         if (copyState.isSelectedRoom[id]) {
             copyState.isSelectedRoom[(id + 1) % 3] = false;
             copyState.isSelectedRoom[(id + 2) % 3] = false;
-            copyState.isSelectedDate[0] = true;
+            copyState.isSelectedDate = [true, false, false];
         }
         else {
-            copyState.isSelectedDate[0] = false;
+            copyState.isSelectedDate = [false, false, false];
         }
         this.setState({
             ...copyState
@@ -151,9 +151,9 @@ class SectionOrder extends Component {
                                 <div class="div-room"></div>
                             </div>
 
-                            <label class="time-label" hidden={!this.state.isSelectedDate[0]}>Thời gian *</label>
+                            <label class="time-label" hidden={!this.state.isSelectedRoom[0] && !this.state.isSelectedRoom[1] && !this.state.isSelectedRoom[2]}>Thời gian *</label>
 
-                            <div class="wrap-time" hidden={!this.state.isSelectedDate[0]}>
+                            <div class="wrap-time" hidden={!this.state.isSelectedRoom[0] && !this.state.isSelectedRoom[1] && !this.state.isSelectedRoom[2]}>
                                 <ul class="tabs group">
                                     <li onClick={() => {this.handleSelectedDate(0)}}> 
                                         {this.state.isSelectedDate[0] ? <a  class="active-time day1">{this.state.dateOfTime[0].toLocaleDateString()}</a> : <a  class="day1">{this.state.dateOfTime[0].toLocaleDateString()}</a>} 
@@ -168,23 +168,23 @@ class SectionOrder extends Component {
 
                                 <div id="content">
                                     <div id="one">
-                                        <button id="9" class="buttonDay1">8h-9h</button>
-                                        <button id="10" class="buttonDay1">9h-10h</button>
-                                        <button id="11" class="buttonDay1">10h-11h</button>
-                                        <button id="12" class="buttonDay1">11h-12h</button>
-                                        <button id="13" class="buttonDay1">12h-13h</button>
+                                        <button id="9">8h-9h</button>
+                                        <button id="10">9h-10h</button>
+                                        <button id="11">10h-11h</button>
+                                        <button id="12">11h-12h</button>
+                                        <button id="13">12h-13h</button>
 
-                                        <button id="14" class="buttonDay1">13h-14h</button>
-                                        <button id="15" class="buttonDay1">14h-15h</button>
-                                        <button id="16" class="buttonDay1">15h-16h</button>
-                                        <button id="17" class="buttonDay1">16h-17h</button>
-                                        <button id="18" class="buttonDay1">17h-18h</button>
+                                        <button id="14">13h-14h</button>
+                                        <button id="15">14h-15h</button>
+                                        <button id="16">15h-16h</button>
+                                        <button id="17">16h-17h</button>
+                                        <button id="18">17h-18h</button>
 
-                                        <button id="19" class="buttonDay1">18h-19h</button>
-                                        <button id="20" class="buttonDay1">19h-20h</button>
-                                        <button id="21" class="buttonDay1">20h-21h</button>
-                                        <button id="22" class="buttonDay1">21h-22h</button>
-                                        <button id="23" class="buttonDay1">22h-23h</button>
+                                        <button id="19">18h-19h</button>
+                                        <button id="20">19h-20h</button>
+                                        <button id="21">20h-21h</button>
+                                        <button id="22">21h-22h</button>
+                                        <button id="23">22h-23h</button>
 
                                     </div>
                                 </div>
