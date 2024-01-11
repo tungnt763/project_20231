@@ -12,9 +12,13 @@ class SectionOrder extends Component {
             fullName: '',
             phoneNumber: '',
             isSelectedRoom: [false, false, false],
+            typeOfRoom: -1,
             dateOfTime: [new Date(), new Date(new Date().getTime() + 24 * 60 * 60 * 1000), new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000)],
+            dateBooking: '',
             isSelectedDate: [false, false, false],
             isSelectedTime: Array(15).fill(false),
+            startTime: -1,
+            endTime: -1,
             address: ["", "1 Ngõ 72 Trần Đại Nghĩa", "47 Thái Hà, Trung Liệt", "352 Giải Phóng, Phương Liệt", "86 Ngõ Giếng, Hoàng Cầu", "269 Kim Ngưu, Hai Bà Trưng", "139 Lò Đúc, Hai Bà Trưng", "Số 1 Đại Cồ Việt"
             , "72 Lý Tự Trọng, Quận 1", "2864 Phạm Thế Hiển, Quận 8", "175b Cao Thắng, Quận 10", "7WM5+P8H, Trường Yên, Hoa Lư", "Cù Chính Lan, Nhật Tân", "23 Bàu Sen, Hòa Hiếu, TX. Thái Hòa", "433 Phủ Qùy, Hòa Hiếu, TX. Thái Hòa",
             "139 Đường 1/5 - TT, Nghĩa Đàn", "E-07, KPTM Vinpearl Hòn Tre, Phường Vĩnh Nguyên"],
@@ -28,12 +32,16 @@ class SectionOrder extends Component {
         let copyState = {...this.state}, cnt = 0;
         copyState.isSelectedRoom[id] = !copyState.isSelectedRoom[id];
         if (copyState.isSelectedRoom[id]) {
+            copyState.typeOfRoom = id;
             copyState.isSelectedRoom[(id + 1) % 3] = false;
             copyState.isSelectedRoom[(id + 2) % 3] = false;
             copyState.isSelectedDate = [true, false, false];
+            copyState.dateBooking = this.state.dateOfTime[0];
         }
         else {
+            copyState.typeOfRoom = -1;
             copyState.isSelectedDate = [false, false, false];
+            copyState.dateBooking = '';
         }
         copyState.isSelectedTime = Array(15).fill(false);
         this.setState({
@@ -43,6 +51,7 @@ class SectionOrder extends Component {
 
     handleSelectedDate = (id) => {
         let copyState = {...this.state}, cnt = 0;
+        copyState.dateBooking = this.state.dateOfTime[id];
         copyState.isSelectedDate[id] = true;
         copyState.isSelectedDate[(id + 1) % 3] = false;
         copyState.isSelectedDate[(id + 2) % 3] = false;
@@ -57,19 +66,19 @@ class SectionOrder extends Component {
         copyState.isSelectedTime[id] = !copyState.isSelectedTime[id];
         // copyState.isSelectedDate[(id + 1) % 3] = false;
         // copyState.isSelectedDate[(id + 2) % 3] = false;
-        let firstIndex = copyState.isSelectedTime.indexOf(true);
-        let lastIndex = copyState.isSelectedTime.lastIndexOf(true);
+        copyState.startTime = copyState.isSelectedTime.indexOf(true);
+        copyState.endTime = copyState.isSelectedTime.lastIndexOf(true);
         if (copyState.isSelectedTime[id]) {
-            for (let i = firstIndex; i <= lastIndex; i++)
+            for (let i = copyState.startTime; i <= copyState.endTime; i++)
                 copyState.isSelectedTime[i] = true;
         }
         else {
-            for (let i = firstIndex; i <= lastIndex; i++)
+            for (let i = copyState.startTime; i <= copyState.endTime; i++)
                 if (i <= id) copyState.isSelectedTime[i] = true;
                 else 
                     copyState.isSelectedTime[i] = false;
         }
-        console.log(firstIndex, lastIndex, copyState.isSelectedTime)
+        // console.log(copyState.startTime, copyState.endTime, copyState.isSelectedTime)
         this.setState({
             ...copyState
         });
@@ -89,13 +98,18 @@ class SectionOrder extends Component {
         this.setState({
             ...copyState
         });
-        console.log(this.state)
+        // console.log(this.state)
+    }
+
+    handleBookingTable = async () => {
+        let message = await bookingUserService(this.state);
+        alert(message.errMessage);
+        // console.log(message);
     }
 
     render() {
         let isSelectedTime = this.state.isSelectedTime;
         let address = this.state.address;
-        // console.log(this.state);
         return ( 
             <React.Fragment>
                 <section class="section1">
@@ -240,7 +254,7 @@ class SectionOrder extends Component {
                             </div>
                         </div>
                         <div class="check-inf">
-                            <button class="checkBtn">
+                            <button class="checkBtn" onClick={() => {this.handleBookingTable()}}>
                                 ĐẶT BÀN NGAY
                             </button>
                             <div class="div-extend-check"></div>

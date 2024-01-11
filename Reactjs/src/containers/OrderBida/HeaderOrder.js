@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { path } from '../../utils';
 import './HeaderOrder.scss';
+import { Link } from 'react-router-dom';
 
 class HeaderOrder extends Component {
 
@@ -18,14 +19,19 @@ class HeaderOrder extends Component {
         })
     }
 
+    handleLogout = () => {
+        localStorage.removeItem("userName")
+        console.log(localStorage.length)
+    }
+
     render() {
+        let userName = localStorage.getItem("userName")
         return ( 
             <React.Fragment>
                 <header className="header">
                     <div className="header-container">
                         <div className="header-logo">
-                            <a href={"." + path.HOMEPAGE}>B<span className="span1">I</span>D<span className="span2">A</span> H<span>U</span>S<span
-                                className="span3">T</span></a>
+                            <Link to={path.HOME}>B<span className="span1">I</span>D<span className="span2">A</span> H<span>U</span>S<span className="span3">T</span></Link>
                         </div>
                         <div className="header-nav">
                             <ul>
@@ -45,8 +51,8 @@ class HeaderOrder extends Component {
                             <div className="sub-menu-wrap" hidden={this.state.isHiddenUserOption}>
                                 <div className="sub-menu">
                                     <div className="user-info">
-                                        <img src={require('../../assets/img/user.png')}/>
-                                        <h2>Minh Tuan</h2>
+                                        {/* <img src={require('../../assets/img/user.png')}/> */}
+                                        <h2>{userName}</h2>
                                     </div>
                                     <hr/>
                                     <a href="#" className="sub-menu-link user-information">
@@ -57,10 +63,10 @@ class HeaderOrder extends Component {
                                         <i className="fas fa-shopping-cart"></i>
                                         <p>Orders</p>
                                     </a>
-                                    <a href="#" className="sub-menu-link user-logout">
+                                    <Link to={path.HOME} className="sub-menu-link user-logout" onClick={() => {this.handleLogout()}}>
                                         <i className="fas fa-sign-out-alt"></i>
                                         <p>Logout</p>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

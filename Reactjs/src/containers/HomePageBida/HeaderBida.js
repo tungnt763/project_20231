@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './HeaderBida.scss';
-import { path } from '../../utils'
+import { path } from '../../utils';
+import { Link } from 'react-router-dom';
 
 class HeaderBida extends Component {
 
@@ -13,17 +14,23 @@ class HeaderBida extends Component {
         this.props.showLoginRegister();
     }
 
+    handleNavigateOrder = () => {
+        if (!localStorage.getItem("userName")) {
+            this.handleShowLoginRegister();
+        }
+    }
+
     render() {
         return ( 
             <React.Fragment>
                 <header className="header">
                     <div className="header-container">
                         <div className="header-logo">
-                            <a href={"." + path.HOME}>B<span className="span1">I</span>D<span className="span2">A</span> H<span>U</span>S<span className="span3">T</span></a>
+                            <Link to={path.HOME}>B<span className="span1">I</span>D<span className="span2">A</span> H<span>U</span>S<span className="span3">T</span></Link>
                         </div>
                         <div className="header-nav">
                             <ul>
-                                <li className="sparkle u-hover--sparkle"><a href={"." + path.ORDER}>Đặt bàn</a></li>
+                                <li className="sparkle u-hover--sparkle"><a href={(localStorage.getItem("userName") ? "." + path.ORDER : "#")} onClick={() => {this.handleNavigateOrder()}}>Đặt bàn</a></li>
                                 <li className="sparkle u-hover--sparkle"><a href="./location.html">Địa điểm</a></li>
                                 <li className="sparkle u-hover--sparkle"><a href="#">Loại bàn</a></li>
                                 <li className="sparkle u-hover--sparkle"><a href="./news.html">Tin tức</a></li>

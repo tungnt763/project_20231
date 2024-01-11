@@ -9,19 +9,22 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            statusId: {
+            phoneNumber: {
                 type: Sequelize.STRING
             },
-            doctorId: {
+            typeOfRoom: {
                 type: Sequelize.INTEGER
             },
-            patientId: {
+            dateBooking: {
+                type: Sequelize.STRING
+            },
+            startTime: {
                 type: Sequelize.INTEGER
             },
-            date: {
-                type: Sequelize.DATE
+            endTime: {
+                type: Sequelize.INTEGER
             },
-            timeType: {
+            address: {
                 type: Sequelize.STRING
             },
             createdAt: {

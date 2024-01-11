@@ -1,5 +1,6 @@
 import db from "../models/index";
 import bcrypt from 'bcryptjs';
+const { Op } = require('sequelize')
 
 const salt = bcrypt.genSaltSync(10);
 
@@ -24,7 +25,7 @@ let handleUserLogin = (phoneNumber, password) => {
                 // compare password
 
                 let user = await db.User.findOne({
-                    attributes: ['phoneNumber', 'roleId', 'password'],
+                    attributes: ['phoneNumber', 'fullName', 'password'],
                     where: { phoneNumber: phoneNumber },
                     raw: true,
                 });
@@ -195,10 +196,98 @@ let updateUserData = (data) => {
     })
 }
 
+let checkBooking = (data) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            console.log(data.addressSelected, data.typeOfRoom, data.dateBooking);
+            let bookingList = await db.Booking.findAll({
+                where: {
+                    address: data.addressSelected,
+                    typeOfRoom: data.typeOfRoom,
+                    dateBooking: data.dateBooking,
+                    [Op.or]: [{
+                            startTime: {
+                                [Op.gte]: data.startTime + 8,
+                                [Op.lte]: data.endTime + 8
+                            }
+                            // startTime: { $lte: data.endTime, }
+                        },
+                        {
+                            endTime: {
+                                [Op.gte]: data.startTime + 9,
+                                [Op.lte]: data.endTime + 9,
+                                // $lte: data.endTime,
+                            }
+                        },
+                        {
+                            startTime: {
+                                [Op.lt]: data.startTime + 8,
+                            },
+                            endTime: {
+                                [Op.gt]: data.endTime + 9,
+                            }
+                        }
+                    ]
+                }
+            });
+
+            // let numberOfRoom = 3;
+            let room = await db.Room_Branch.findOne({
+                // attributes: ['numberOfRoom'],
+                where: {
+                    address: data.addressSelected,
+                    typeOfRoom: data.typeOfRoom,
+                }
+            });
+
+            console.log(bookingList, room.numberOfRoom)
+
+            if (bookingList.length < room.numberOfRoom) {
+                resolve(true);
+            } else {
+                resolve(false);
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let bookingTable = (data) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            // address, room, startTime
+            let check = await checkBooking(data);
+            if (!check) {
+                resolve({
+                    errCode: 2,
+                    errMessage: 'Không còn phòng phù hợp',
+                })
+            } else {
+                await db.Booking.create({
+                    phoneNumber: data.phoneNumber,
+                    typeOfRoom: data.typeOfRoom,
+                    dateBooking: data.dateBooking,
+                    startTime: data.startTime + 8,
+                    endTime: data.endTime + 9,
+                    address: data.addressSelected,
+                })
+                resolve({
+                    errCode: 0,
+                    errMessage: 'Đặt phòng thành công',
+                })
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 module.exports = {
     handleUserLogin: handleUserLogin,
     getAllUsers: getAllUsers,
     createNewUser: createNewUser,
     deleteUser: deleteUser,
     updateUserData: updateUserData,
+    bookingTable: bookingTable,
 }

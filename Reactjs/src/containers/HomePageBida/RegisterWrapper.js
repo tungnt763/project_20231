@@ -19,11 +19,12 @@ class RegisterWrapper extends Component {
 
     listenToEmitter() {
         emitter.on('EVENT_CLEAR_MODAL_DATA', () => {
-            console.log("Yeahhhh");
             this.setState({
                 fullName: '',
                 phoneNumber: '',
-                password: ''
+                password: '',
+                isShowPassword: false,
+                isCommited: false,
             })
         })
     }

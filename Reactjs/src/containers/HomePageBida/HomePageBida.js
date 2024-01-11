@@ -11,6 +11,7 @@ import './HomeBida.scss';
 import './HomePageBida.scss';
 // import './SwiperBida.scss';
 import { emitter } from "../../utils/emitter";
+import HeaderOrder from '../OrderBida/HeaderOrder';
 
 class HomePageBida extends Component {
     
@@ -24,7 +25,6 @@ class HomePageBida extends Component {
     }
 
     componentDidMount() {
-
     }
 
     showLoginRegister = () => {
@@ -45,6 +45,10 @@ class HomePageBida extends Component {
         emitter.emit('EVENT_CLEAR_MODAL_DATA')
     }
 
+    // handleIsLoggedInHomePage = (data) => {
+    //     this.props.handleIsLoggedIn(data)
+    // }
+
     createNewUser = async (data) => {
         try {
             let response = await createNewUserService(data);
@@ -61,13 +65,16 @@ class HomePageBida extends Component {
     }
 
     render() {
+        console.log(localStorage)
         return ( 
             <div>
-                <HeaderBida 
-                    isHiddenLogin={this.state.isHiddenLogin}
-                    showLoginRegister={this.showLoginRegister}
-                    // hideLoginRegister={this.hideLoginRegister}
-                />
+                {!localStorage.getItem("userName") ? 
+                    <HeaderBida 
+                        isHiddenLogin={this.state.isHiddenLogin}
+                        showLoginRegister={this.showLoginRegister}
+                    /> : <HeaderOrder />
+                }
+                
                 <div class="home">
                     <div class="home-img">
                         <div class="home-content">
@@ -83,7 +90,8 @@ class HomePageBida extends Component {
                                 isHiddenLogin={this.state.isHiddenLogin}
                                 showLoginRegister={this.showLoginRegister}
                                 hideLoginRegister={this.hideLoginRegister}
-                                handleLogin={this.handleLogin}
+                                // isLoggedInApp={this.props.isLoggedInApp}
+                                // handleIsLoggedInHomePage={this.handleIsLoggedInHomePage}
                             />
                             <RegisterWrapper 
                                 isHiddenRegister={this.state.isHiddenRegister}

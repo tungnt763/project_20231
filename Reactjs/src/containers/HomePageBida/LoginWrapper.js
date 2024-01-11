@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleLoginApi } from '../../services/userService';
 import './LoginWrapper.scss';
+import { emitter } from '../../utils/emitter';
 
 class LoginWrapper extends Component {
     constructor(props) {
@@ -12,6 +13,20 @@ class LoginWrapper extends Component {
             isShowPassword: false,
             errMessage: '',
         }
+
+        this.listenToEmitter();
+    }
+
+    listenToEmitter() {
+        emitter.on('EVENT_CLEAR_MODAL_DATA', () => {
+            console.log("Yeahhhh");
+            this.setState({
+                phoneNumber: '',
+                password: '',
+                isShowPassword: false,
+                errMessage: '',
+            })
+        })
     }
 
     handleOnChangeInput = (event, id) => {
@@ -42,7 +57,6 @@ class LoginWrapper extends Component {
         })
         try {
             let data = await handleLoginApi(this.state.phoneNumber, this.state.password)
-            console.log(data)
             if (data && data.errCode !== 0) {
                 this.setState({
                     errMessage: data.message
@@ -51,7 +65,11 @@ class LoginWrapper extends Component {
             }
             if (data && data.errCode === 0) {
                 //todo
-                this.props.hideLoginRegister()
+                // this.props.handleIsLoggedInHomePage(data);
+                // console.log(this.props);
+                localStorage.setItem("userName", data.user.fullName);
+                console.log(localStorage.getItem("userName"));
+                this.handleHideLoginRegister();
             }
         } catch(error) {
             if (error.response) {
@@ -82,6 +100,7 @@ class LoginWrapper extends Component {
                                 <input 
                                     type="tel" 
                                     onChange={(event) => this.handleOnChangeInput(event, "phoneNumber")}
+                                    value={this.state.phoneNumber}
                                     required
                                 />
                                 <label >Số điện thoại</label>
@@ -93,6 +112,7 @@ class LoginWrapper extends Component {
                                 <input 
                                     type={this.state.isShowPassword ? 'text' : 'password'}
                                     onChange={(event) => this.handleOnChangeInput(event, "password")}
+                                    value={this.state.password}
                                     required
                                 />
                                 <label >Mật khẩu</label>

@@ -64,10 +64,37 @@ let handleEditUser = async(req, res) => {
     return res.status(200).json(message)
 }
 
+let handleBookingTable = async(req, res) => {
+    let typeOfRoom = req.body.typeOfRoom;
+    let startTime = req.body.startTime;
+    let address = req.body.addressSelected;
+
+    if (address === "") {
+        return res.status(200).json({
+            errCode: 1,
+            errMessage: 'Bạn chưa chọn chi nhánh'
+        })
+    } else if (typeOfRoom < 0) {
+        return res.status(200).json({
+            errCode: 1,
+            errMessage: 'Bạn chưa chọn loại phòng'
+        })
+    } else if (startTime < 0) {
+        return res.status(200).json({
+            errCode: 1,
+            errMessage: 'Bạn chưa chọn thời gian'
+        })
+    } else {
+        let message = await userService.bookingTable(req.body);
+        return res.status(200).json(message);
+    }
+}
+
 module.exports = {
     handleLogin: handleLogin,
     handleGetAllUser: handleGetAllUser,
     handleCreateNewUser: handleCreateNewUser,
     handleEditUser: handleEditUser,
     handleDeleteUser: handleDeleteUser,
+    handleBookingTable: handleBookingTable,
 }

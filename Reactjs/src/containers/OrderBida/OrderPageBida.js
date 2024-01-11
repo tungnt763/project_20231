@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './OrderPageBida.scss';
 import HeaderOrder from './HeaderOrder';
+import HeaderBida from '../HomePageBida/HeaderBida';
 import SectionOrder from './SectionOrder';
 
 class OrderPageBida extends Component {
@@ -10,6 +11,7 @@ class OrderPageBida extends Component {
         super(props);
         this.state = {
         }
+        console.log(this.props);
     }
 
     componentDidMount() {
@@ -20,7 +22,12 @@ class OrderPageBida extends Component {
         return ( 
             <React.Fragment>
                 <div className="div-body">
-                    <HeaderOrder />
+                    {!localStorage.getItem("userName") ? 
+                        <HeaderBida 
+                            isHiddenLogin={this.state.isHiddenLogin}
+                            showLoginRegister={this.showLoginRegister}
+                        /> : <HeaderOrder />
+                    }
                     <SectionOrder />
                 </div>
             </React.Fragment>

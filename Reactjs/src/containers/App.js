@@ -23,6 +23,9 @@ import HomePageBida from './HomePageBida/HomePageBida.js'
 import OrderPageBida from './OrderBida/OrderPageBida.js';
 
 class App extends Component {
+    // handleIsLoggedIn = (data) => {
+    //     localStorage.setItem("userName", localStorage.getItem("userName"))
+    // }
 
     handlePersistorState = () => {
         const { persistor } = this.props;
@@ -55,6 +58,22 @@ class App extends Component {
                                 <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                 <Route path={path.ORDER} component={(OrderPageBida)} />
                                 <Route path={path.HOMEPAGE} component={(HomePageBida)} />
+                                {/* <Route 
+                                    path={path.HOMEPAGE} 
+                                    render={() => <HomePageBida 
+                                        isLoggedInApp={this.state.isLoggedInApp} 
+                                        userName={this.state.userName} 
+                                        handleIsLoggedIn={this.handleIsLoggedIn}
+                                    />} 
+                                />
+                                <Route 
+                                    path={path.ORDER} 
+                                    render={() => <OrderPageBida 
+                                        isLoggedInApp={this.state.isLoggedInApp} 
+                                        userName={this.state.userName} 
+                                        handleIsLoggedIn={this.handleIsLoggedIn}
+                                    />} 
+                                /> */}
                             </Switch>
                         </span>
 
@@ -74,7 +93,7 @@ class App extends Component {
 const mapStateToProps = state => {
     return {
         started: state.app.started,
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
     };
 };
 
