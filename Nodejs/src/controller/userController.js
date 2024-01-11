@@ -5,22 +5,22 @@ let handleLogin = async(req, res) => {
     let password = req.body.password;
 
     if (!phoneNumber || !password) {
-        return res.status(500).json({
+        return res.status(200).json({
             errCode: 1,
-            message: 'Missing inputs parameter!'
+            message: 'Hãy điền đủ các ô cần thiết'
+        })
+    } else {
+        let userData = await userService.handleUserLogin(phoneNumber, password);
+        // check phoneNumber exist
+        // compare password 
+        // return userInfo
+        // access_token: JWT
+        return res.status(200).json({
+            errCode: userData.errCode,
+            message: userData.errMessage,
+            user: userData ? userData.user : {}
         })
     }
-
-    let userData = await userService.handleUserLogin(phoneNumber, password);
-    // check phoneNumber exist
-    // compare password 
-    // return userInfo
-    // access_token: JWT
-    return res.status(200).json({
-        errCode: userData.errCode,
-        message: userData.errMessage,
-        user: userData ? userData.user : {}
-    })
 }
 
 let handleGetAllUser = async(req, res) => {

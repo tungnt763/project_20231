@@ -35,21 +35,21 @@ let handleUserLogin = (phoneNumber, password) => {
                     let check = await bcrypt.compareSync(password, user.password);
                     if (check) {
                         userData.errCode = 0;
-                        userData.errMessage = 'Ok';
+                        userData.errMessage = 'Đăng nhập thành công';
                         delete user.password;
                         userData.user = user;
                     } else {
                         userData.errCode = 3;
-                        userData.errMessage = 'Wrong password';
+                        userData.errMessage = 'Sai mật khẩu';
                     }
                 } else {
                     userData.errCode = 2;
-                    userData.errMessage = `User not found`;
+                    userData.errMessage = `Không tìm thấy người dùng`;
                 }
             } else {
                 // return error
                 userData.errCode = 1;
-                userData.errMessage = `Your phoneNumber isn't exist in your FileSystem. Pls try other phoneNumber`
+                userData.errMessage = `Số điện thoại chưa được đăng ký`
             }
             resolve(userData)
         } catch (e) {
@@ -109,7 +109,7 @@ let createNewUser = (data) => {
             if (check === true) {
                 resolve({
                     errCode: 1,
-                    errMessage: 'Your phoneNumber is used, pls use other phoneNumber'
+                    errMessage: 'Số điện thoại này đã được đăng ký. Hãy dùng số khác'
                 })
             } else {
                 let hashPasswordFromBcrypt = await hashUserPassword(data.password);

@@ -31,7 +31,7 @@ class HeaderOrder extends Component {
                 <header className="header">
                     <div className="header-container">
                         <div className="header-logo">
-                            <Link to={path.HOME}>B<span className="span1">I</span>D<span className="span2">A</span> H<span>U</span>S<span className="span3">T</span></Link>
+                            <Link to={path.HOMEPAGE}>B<span className="span1">I</span>D<span className="span2">A</span> H<span>U</span>S<span className="span3">T</span></Link>
                         </div>
                         <div className="header-nav">
                             <ul>

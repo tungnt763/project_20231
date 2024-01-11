@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { handleLoginApi } from '../../services/userService';
 import './LoginWrapper.scss';
 import { emitter } from '../../utils/emitter';
+import { path } from '../../utils';
+import { Link } from 'react-router-dom';
 
 class LoginWrapper extends Component {
     constructor(props) {
@@ -62,13 +64,12 @@ class LoginWrapper extends Component {
                     errMessage: data.message
                 })
                 alert(this.state.errMessage)
-            }
-            if (data && data.errCode === 0) {
+            } else if (data && data.errCode === 0) {
                 //todo
                 // this.props.handleIsLoggedInHomePage(data);
                 // console.log(this.props);
                 localStorage.setItem("userName", data.user.fullName);
-                console.log(localStorage.getItem("userName"));
+                // console.log(localStorage.getItem("userName"));
                 this.handleHideLoginRegister();
             }
         } catch(error) {
@@ -124,13 +125,15 @@ class LoginWrapper extends Component {
                                 </label>
                                 <a href="#">Bạn quên mật khẩu?</a>
                             </div>
-                            <button 
-                                type="submit" 
-                                className="login-btn"
-                                onClick={(event) => {this.handleLogin()}}
-                            >
-                                Đăng nhập
-                            </button>
+                            <Link to={path.HOMEPAGE}>
+                                <button 
+                                    type="submit" 
+                                    className="login-btn"
+                                    onClick={() => {this.handleLogin()}}
+                                >
+                                    Đăng nhập
+                                </button>
+                            </Link>
                             <div className="login-register">
                                 <p>Bạn chưa có tài khoản?</p>
                                 <a href="#" className="register-link" onClick={() => this.handleShowLoginRegister()}>Đăng ký ngay</a>
