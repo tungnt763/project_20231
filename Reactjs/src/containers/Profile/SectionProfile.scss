@@ -1,0 +1,181 @@
+@import 'material-symbols';
+.container {
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+  }
+  .container .content {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 387px 800px;
+    grid-column-gap: 40px;
+  }
+  
+  .myAccount-detail{
+    margin-top: 100px;
+  }
+  .myAccount-nav {
+    margin-top: 100px;
+    width: 100%;
+  }
+  
+  .myAccount-nav ul{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    border: 1px solid var(--primary-orange);
+  }
+  
+  .myAccount-nav ul li {
+    padding: 24px 0 24px 20px;
+    border-bottom:1px solid var(--primary-orange) ;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+  .myAccount-nav ul li span {
+    font-size: 26px;
+  }
+  .myAccount-nav ul li a {
+    font-size: 16px;
+  }
+  
+  .active-nav  {
+    background-color: var(--primary-orange);
+    
+  }
+  
+  .active-nav  span {
+    color: #141414;
+  }
+  .active-nav  a {
+    color: #141414;
+    font-weight: bold;
+  }
+  
+  .account-sub-title {
+    display: block;
+    font-size: 20px;
+    padding-bottom: 15px ;
+    margin-bottom:20px ;
+    font-weight: bold;
+    color: var(--primary-orange);
+    border-bottom: 0.8px solid var(--primary-orange);
+  } 
+  
+  
+  .change-information .title,.change-password .title {
+    color: white;
+    text-align: left;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .group-wrapper {
+   display: grid ;
+   grid-template-columns: repeat(2,391px) ;
+   row-gap: 20px;
+   column-gap: 20px;
+   margin-top: 15px;
+  }
+  .input-wrapper {
+    position:relative ;
+  }
+  
+  .input-wrapper input{
+    height: 65px;
+    width: 100%;  
+    font-size: 16px;
+    padding:27px 24px 13px 24px;
+    background-color: #201C13;
+    border: none;
+    color: white;
+    outline: none;
+  }
+  
+  .user_birthday {
+    background-image: url(https://cdn-icons-png.flaticon.com/512/10691/10691802.png);
+    background-size:18px ;
+    background-repeat: no-repeat;
+    background-position: 93%;
+    background-position-y: 25px;
+    
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .input-wrapper label {
+    position: absolute;
+    top:40%; 
+    left: 25px;
+    transform: translateY(-15%);
+    font-size: 17px;
+    font-weight:500 ;
+    transition: 0.5s;
+  } 
+  
+  .label_birthday {
+    color: #84817D !important; 
+    transform: translateY(-20px) !important;
+     font-size: 13px !important;
+     font-weight: 600 !important;
+  }
+  
+  .input-wrapper input:focus~label,
+  .input-wrapper input:valid~label {
+     color: #84817D;
+     transform: translateY(-20px);
+     font-size: 13px;
+     font-weight: 600;
+  }
+  
+  .submit-button {
+      margin-top: 22px;
+      background: #FFBA00 !important;
+      border: none;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 30px;
+      text-align: center;
+      text-transform: uppercase;
+      color: #141414;
+      padding: 7px 81px;
+      transform: translate(558px);
+      cursor: pointer;
+      margin-bottom: 35px;
+  }
+  
+  
+  .line {
+    border-bottom: 0.8px solid var(--primary-orange);
+    margin-bottom:40px ;
+  }
+  
+  .change-password .group-wrapper{
+    display: grid ;
+    grid-template-columns: repeat(1,800px) ;
+    row-gap: 20px;
+    column-gap: 20px;
+    margin-top: 15px;
+  }
+  
+  .submit-pass {
+    margin-top: 22px;
+    background: #FFBA00 !important;
+    border: none;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #141414;
+    padding: 7px 81px;
+    transform: translate(558px);
+    cursor: pointer;
+    margin-bottom: 35px;
+  }

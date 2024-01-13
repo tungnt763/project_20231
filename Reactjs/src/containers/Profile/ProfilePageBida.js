@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./OrderPageBida.scss";
-import HeaderOrder from "./HeaderOrder";
+import "./ProfilePageBida.scss";
+import HeaderOrder from "../OrderBida/HeaderOrder";
 import HeaderBida from "../HomePageBida/HeaderBida";
-import SectionOrder from "./SectionOrder";
+import SectionProfile from "./SectionProfile";
+import Footer from "./Footer";
 
-class OrderPageBida extends Component {
+class ProfilePageBida extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -26,7 +27,8 @@ class OrderPageBida extends Component {
           ) : (
             <HeaderOrder />
           )}
-          <SectionOrder />
+          <SectionProfile />
+          <Footer />
         </div>
       </React.Fragment>
     );
@@ -43,4 +45,4 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderPageBida);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePageBida);

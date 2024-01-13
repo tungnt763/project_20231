@@ -1,28 +1,29 @@
 export const path = {
-    HOME: '/',
-    HOMEPAGE: '/home',
-    LOGIN: '/login',
-    LOG_OUT: '/logout',
-    SYSTEM: '/system',
-    ORDER: '/order',
+  HOME: "/",
+  HOMEPAGE: "/home",
+  LOGIN: "/login",
+  LOG_OUT: "/logout",
+  SYSTEM: "/system",
+  ORDER: "/order",
+  PROFILE: "/profile",
 };
 
 export const languages = {
-    VI: 'vi',
-    EN: 'en'
+  VI: "vi",
+  EN: "en",
 };
 
 export const manageActions = {
-    ADD: "ADD",
-    EDIT: "EDIT",
-    DELETE: "DELETE"
+  ADD: "ADD",
+  EDIT: "EDIT",
+  DELETE: "DELETE",
 };
 
 export const dateFormat = {
-    SEND_TO_SERVER: 'DD/MM/YYYY'
+  SEND_TO_SERVER: "DD/MM/YYYY",
 };
 
 export const YesNoObj = {
-    YES: 'Y',
-    NO: 'N'
-}
+  YES: "Y",
+  NO: "N",
+};
