@@ -344,7 +344,7 @@ let checkBooking = (data) => {
                 where: {
                     address: data.addressSelected,
                     typeOfRoom: data.typeOfRoom,
-                    dateBooking: data.dateBooking,
+                    dateBooking: new Date(data.dateBooking).toLocaleDateString(),
                     [Op.or]: [{
                             startTime: {
                                 [Op.gte]: data.startTime + 8,
@@ -361,10 +361,10 @@ let checkBooking = (data) => {
                         },
                         {
                             startTime: {
-                                [Op.lt]: data.startTime + 8,
+                                [Op.lte]: data.startTime + 8,
                             },
                             endTime: {
-                                [Op.gt]: data.endTime + 9,
+                                [Op.gte]: data.endTime + 9,
                             },
                         },
                     ],
@@ -377,6 +377,8 @@ let checkBooking = (data) => {
                     typeOfRoom: data.typeOfRoom,
                 },
             });
+
+            // console.log(bookingList, room.numberOfRoom);
 
             if (room && bookingList.length < room.numberOfRoom) {
                 resolve(true);
@@ -403,7 +405,7 @@ let bookingTable = (data) => {
                 await db.Booking.create({
                     phoneNumber: data.phoneNumber,
                     typeOfRoom: data.typeOfRoom,
-                    dateBooking: data.dateBooking,
+                    dateBooking: new Date(data.dateBooking).toLocaleDateString(),
                     startTime: data.startTime + 8,
                     endTime: data.endTime + 9,
                     address: data.addressSelected,

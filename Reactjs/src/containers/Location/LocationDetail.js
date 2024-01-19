@@ -2,6 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bookingUserService } from "../../services/userService";
 import "./LocationDetail.scss";
+import { Link } from "react-router-dom/cjs/react-router-dom";
+import { path } from "../../utils/constant";
+import branch1 from "../../assets/location/1.png";
+import branch2 from "../../assets/location/2.jpg";
+import branch3 from "../../assets/location/3.png";
+import branch4 from "../../assets/location/4.png";
+import branch5 from "../../assets/location/5.png";
+import branch6 from "../../assets/location/6.jpg";
+import branch7 from "../../assets/location/7.jpg";
 
 class LocationDetail extends Component {
   constructor(props) {
@@ -19,13 +28,15 @@ class LocationDetail extends Component {
           <div class="loc-container">
             <div class="loc">
               <div class="div-img">
-                <img src="../địa điểm/địa điểm/1.png" />
-                <div
-                  class="appear"
-                  data-location-name="1 Ngõ 72 Trần Đại Nghĩa"
-                >
-                  ĐẶT BÀN
-                </div>
+                <img src={branch1} alt={"branch1"} />
+                <Link to={localStorage.getItem("id") ? path.ORDER : path.HOMEPAGE}>
+                  <div
+                    class="appear"
+                    data-location-name="1 Ngõ 72 Trần Đại Nghĩa"
+                  >
+                    ĐẶT BÀN
+                  </div>
+                </Link>
               </div>
               <div class="information">
                 <div class="location-inf">
@@ -54,10 +65,12 @@ class LocationDetail extends Component {
 
             <div class="loc">
               <div class="div-img">
-                <img src="../địa điểm/địa điểm/2.jpg" />
-                <div class="appear" data-location-name="47 Thái Hà, Trung Liệt">
-                  ĐẶT BÀN
-                </div>
+                <img src={branch2} alt="branch2" />
+                <Link to={localStorage.getItem("id") ? path.ORDER : path.HOMEPAGE}>
+                  <div class="appear" data-location-name="47 Thái Hà, Trung Liệt">
+                    ĐẶT BÀN
+                  </div>
+                </Link>
               </div>
               <div class="information">
                 <div class="location-inf">
@@ -80,13 +93,15 @@ class LocationDetail extends Component {
 
             <div class="loc">
               <div class="div-img">
-                <img src="../địa điểm/địa điểm/3.png" />
-                <div
-                  class="appear"
-                  data-location-name="352 Giải Phóng, Phương Liệt"
-                >
-                  ĐẶT BÀN
-                </div>
+                <img src={branch3} alt="branch3" />
+                <Link to={localStorage.getItem("id") ? path.ORDER : path.HOMEPAGE}>
+                  <div
+                    class="appear"
+                    data-location-name="352 Giải Phóng, Phương Liệt"
+                  >
+                    ĐẶT BÀN
+                  </div>
+                </Link>
               </div>
               <div class="information">
                 <div class="location-inf">
@@ -109,13 +124,15 @@ class LocationDetail extends Component {
 
             <div class="loc">
               <div class="div-img">
-                <img src="../địa điểm/địa điểm/4.png" />
+              <img src={branch4} alt={"branch4"} />
+              <Link to={localStorage.getItem("id") ? path.ORDER : path.HOMEPAGE}>
                 <div
                   class="appear"
                   data-location-name="86 Ngõ Giếng, Hoàng Cầu"
                 >
                   ĐẶT BÀN
                 </div>
+              </Link>
               </div>
               <div class="information">
                 <div class="location-inf">
@@ -138,13 +155,15 @@ class LocationDetail extends Component {
 
             <div class="loc">
               <div class="div-img">
-                <img src="../địa điểm/địa điểm/5.png" />
-                <div
-                  class="appear"
-                  data-location-name="269 Kim Ngưu, Hai Bà Trưng"
-                >
-                  ĐẶT BÀN
-                </div>
+                <img src={branch5} alt={"branch5"} />
+                <Link to={localStorage.getItem("id") ? path.ORDER : path.HOMEPAGE}>
+                  <div
+                    class="appear"
+                    data-location-name="269 Kim Ngưu, Hai Bà Trưng"
+                  >
+                    ĐẶT BÀN
+                  </div>
+                </Link>
               </div>
               <div class="information">
                 <div class="location-inf">
@@ -167,13 +186,15 @@ class LocationDetail extends Component {
 
             <div class="loc">
               <div class="div-img">
-                <img src="../địa điểm/địa điểm/6.jpg" />
-                <div
-                  class="appear"
-                  data-location-name="139 Lò Đúc, Hai Bà Trưng"
-                >
-                  ĐẶT BÀN
-                </div>
+                <img src={branch6} alt={"branch6"} />
+                <Link to={localStorage.getItem("id") ? path.ORDER : path.HOMEPAGE}>
+                  <div
+                    class="appear"
+                    data-location-name="139 Lò Đúc, Hai Bà Trưng"
+                  >
+                    ĐẶT BÀN
+                  </div>
+                </Link>
               </div>
               <div class="information">
                 <div class="location-inf">
@@ -196,10 +217,12 @@ class LocationDetail extends Component {
 
             <div class="loc">
               <div class="div-img">
-                <img src="../địa điểm/địa điểm/7.jpg" />
-                <div class="appear" data-location-name="Số 1 Đại Cồ Việt">
-                  ĐẶT BÀN
-                </div>
+                <img src={branch7} alt={"branch7"} />
+                <Link to={localStorage.getItem("id") ? path.ORDER : path.HOMEPAGE}>
+                  <div class="appear" data-location-name="Số 1 Đại Cồ Việt">
+                    ĐẶT BÀN
+                  </div>
+                </Link>
               </div>
               <div class="information">
                 <div class="location-inf">
@@ -219,6 +242,8 @@ class LocationDetail extends Component {
                 </div>
               </div>
             </div>
+            <div class="loc"></div>
+            <div class="loc"></div>
           </div>
         </div>
       </React.Fragment>

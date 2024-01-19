@@ -3,6 +3,12 @@ import { connect } from "react-redux";
 import { bookingUserService } from "../../services/userService";
 import "./SectionNews.scss";
 import { path } from "../../utils";
+import new1 from "../../assets/banner/12.png";
+import new2 from "../../assets/banner/11.png";
+import new3 from "../../assets/banner/10.png";
+import new4 from "../../assets/banner/9.png";
+import new5 from "../../assets/banner/8.png";
+import new6 from "../../assets/banner/7.png";
 
 class SectionNews extends Component {
   constructor(props) {
@@ -25,7 +31,7 @@ class SectionNews extends Component {
 
           <div class="news-container-content">
             <div class="new-feeds-content">
-              <img class="new-img" src="../banner/12.png" alt="" />
+              <img class="new-img" src={new1} alt="new1" />
               <span class="new-feeds-date">18/11/2023</span>
               <h3>TỔNG HỢP CÁC CHƯƠNG TRÌNH ƯU ĐÃI TẠI BIDA HUST</h3>
               <p>
@@ -34,7 +40,7 @@ class SectionNews extends Component {
               </p>
             </div>
             <div class="new-feeds-content">
-              <img class="new-img" src="../banner/11.png" alt="" />
+              <img class="new-img" src={new2} alt="new2" />
               <span class="new-feeds-date">16/11/2023</span>
               <h3>TRẢI NGHIỆM LỄ HỘI HÓA TRANG HALLOWEEN TẠI BIDA HUST</h3>
               <p>
@@ -43,7 +49,7 @@ class SectionNews extends Component {
               </p>
             </div>
             <div class="new-feeds-content">
-              <img class="new-img" src="../banner/10.png" alt="" />
+              <img class="new-img" src={new3} alt="new3" />
               <span class="new-feeds-date">15/11/2023</span>
               <h3>LADIES - NIGHT ƯU ĐÃI HẤP DẪN DÀNH CHO PHÁI NỮ</h3>
               <p>
@@ -52,7 +58,7 @@ class SectionNews extends Component {
               </p>
             </div>
             <div class="new-feeds-content">
-              <img class="new-img" src="../banner/9.png" alt="" />
+              <img class="new-img" src={new4} alt="new4" />
               <span class="new-feeds-date">14/11/2023</span>
               <h3>TÌM HIỂU TOP 5 CÂY CƠ TỐT NHẤT TẠI BIDA HUST</h3>
               <p>
@@ -61,7 +67,7 @@ class SectionNews extends Component {
               </p>
             </div>
             <div class="new-feeds-content">
-              <img class="new-img" src="../banner/8.png" alt="" />
+              <img class="new-img" src={new5} alt="new5" />
               <span class="new-feeds-date">13/11/2023</span>
               <h3>KHÁM PHÁ NHỮNG ĐIỀU ẤN TƯỢNG MÀ BIDA HUST ĐEM LẠI</h3>
               <p>
@@ -70,7 +76,7 @@ class SectionNews extends Component {
               </p>
             </div>
             <div class="new-feeds-content">
-              <img class="new-img" src="../banner/7.png" alt="" />
+              <img class="new-img" src={new6} alt="new6" />
               <span class="new-feeds-date">06/11/2023</span>
               <h3>BIDA HUST - ĐỊA ĐIỂM LÝ TƯỞNG DÀNH CHO CÁC CẶP ĐÔI HẸN HÒ</h3>
               <p>
