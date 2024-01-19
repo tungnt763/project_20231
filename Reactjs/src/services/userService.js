@@ -28,8 +28,13 @@ const deleteUserService = (userId) => {
     })
 }
 
+const editUserInfoService = (inputData) => {
+    console.log(inputData)
+    return axios.put('/api/edit-user-info', inputData)
+}
+
 const editUserService = (inputData) => {
-    return axios.put('/api/edit-user', inputData)
+    return axios.put('/api/edit-user-info', inputData)
 }
 
 const bookingUserService = (info) => {
@@ -37,4 +42,4 @@ const bookingUserService = (info) => {
     return axios.post('/api/booking-table', info)
 }
 
-export { handleLoginApi, getAllUsers, createNewUserService, deleteUserService, editUserService, bookingUserService, getAllOrders }
+export { handleLoginApi, getAllUsers, createNewUserService, deleteUserService, editUserInfoService, editUserService, bookingUserService, getAllOrders }

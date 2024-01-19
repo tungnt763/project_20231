@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bookingUserService } from "../../services/userService";
 import "./SectionProfile.scss";
-import { getAllUsers, editUserService } from "../../services/userService";
+import { getAllUsers, editUserInfoService } from "../../services/userService";
 import MenuMyAccount from "./MenuMyAccount";
 
 class SectionProfile extends Component {
@@ -31,7 +30,7 @@ class SectionProfile extends Component {
 
   doEditUserInfo = async(user) => {
       try {
-          let res = await editUserService(user);
+          let res = await editUserInfoService(user);
           if (res && res.errCode === 0) {
               await this.getAllUsersFromReact()
           }
@@ -47,37 +46,33 @@ class SectionProfile extends Component {
     let arrInput = ['email', 'fullName', 'birthday']
     for (let i = 0; i < arrInput.length; i++) {
         if (!this.state[arrInput[i]]) {
-            alert('Missing parameter: ' + arrInput[i]);
+            // alert('Missing parameter: ' + arrInput[i]);
             return false;
         }
     }
     return true;
   }
 
-  handleSaveUserInfo = () => {
-      let isValid = this.checkValidateInputInfo();
-      if (isValid) {
-          // call API edit user modal
-          this.doEditUserInfo(this.state);
-      }
-  }
-
   handleOnChangeInput = (event, id) => {
     // good code
-    console.log(new Date(event.target.value))
     let copyState = {...this.state};
-    if (id != "birthday") copyState["user"][id] = event.target.value;
-    else 
-        copyState["user"][id] = new Date(event.target.value);
+    copyState["user"][id] = event.target.value;
     this.setState({
         ...copyState
     });
   }
 
+  handleUpdateUserInfo = () => {
+    let isValid = this.checkValidateInputInfo();
+    if (isValid) {
+        this.doEditUserInfo(this.state.user);
+    }
+  }
+
   render() {
     // this.componentDidMount();
     let user = this.state.user;
-    // console.log(this.state.user);
+    console.log(this.state.user);
     return (
       <React.Fragment>
         <section class="sectionProfile">
@@ -135,6 +130,7 @@ class SectionProfile extends Component {
                       type="submit"
                       value="Cập Nhật"
                       class="submit-button"
+                      onClick={() => {this.handleUpdateUserInfo()}}
                     />
                   </form>
                 </div>

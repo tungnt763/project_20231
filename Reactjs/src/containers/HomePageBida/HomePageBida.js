@@ -17,6 +17,8 @@ import "./HomePageBida.scss";
 // import './SwiperBida.scss';
 import { emitter } from "../../utils/emitter";
 import HeaderOrder from "../OrderBida/HeaderOrder";
+import { path } from "../../utils";
+import { Link } from "react-router-dom/cjs/react-router-dom";
 
 class HomePageBida extends Component {
   constructor(props) {
@@ -86,11 +88,13 @@ class HomePageBida extends Component {
                 <h1>
                   <span class="translate">Ethereum</span>
                 </h1>
-                <div class="btn btn-login">
-                  <p>ĐẶT NGAY</p>
-                  <span class="BorderTopBottom"></span>
-                  <span class="BorderLeftRight"></span>
-                </div>
+                <Link to={path.ORDER}>
+                  <div class="btn btn-login">
+                    <p>ĐẶT NGAY</p>
+                    <span class="BorderTopBottom"></span>
+                    <span class="BorderLeftRight"></span>
+                  </div>
+                </Link>
               </div>
               <LoginWrapper
                 isHiddenLogin={this.state.isHiddenLogin}

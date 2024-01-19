@@ -64,16 +64,72 @@ let checkPhoneNumber = (phoneNumber) => {
             let user = await db.User.findOne({
                 where: { phoneNumber: phoneNumber },
             });
-            if (user) {
-                resolve(true);
-            } else {
-                resolve(false);
+
+            let checkPhoneNumber = true;
+            let numbers = /[0-9]/g;
+            for (let i = 0; i < phoneNumber.length; i++) {
+                if (!phoneNumber[i].match(numbers)) {
+                    checkPhoneNumber = false;
+                    break;
+                }
             }
+
+            // if (user && checkPhoneNumber && phoneNumber.length === 10) {
+            //     resolve(true);
+            // } else {
+            //     resolve(false);
+            // }
+            if (user) {
+                resolve("Số điện thoại này đã được đăng ký. Hãy dùng số khác")
+            } else if (!checkPhoneNumber || phoneNumber.length !== 10) {
+                resolve("Số điện thoại không đúng định dạng")
+            } else resolve("")
         } catch (e) {
             reject(e);
         }
     });
 };
+
+let checkPasswordFormat = (password) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            if (!password) {
+                resolve("Hãy điền đủ các ô cần thiết");
+            } else if (password.length < 8) {
+                resolve("Mật khẩu phải từ 8 kí tự trở lên");
+            } else {
+                let checkPassword = [false, false, false];
+                let upperCaseLetters = /[A-Z]/g,
+                    lowerCaseLetters = /[a-z]/g,
+                    numbers = /[0-9]/g;
+                for (let i = 0; i < password.length; i++) {
+                    if (password[i].match(upperCaseLetters)) {
+                        checkPassword[0] = true;
+                        // break;
+                    }
+                    if (password[i].match(lowerCaseLetters)) {
+                        checkPassword[1] = true;
+                        // break;
+                    }
+                    if (password[i].match(numbers)) {
+                        checkPassword[2] = true;
+                        // break;
+                    }
+                }
+                if (!checkPassword[0]) {
+                    resolve("Mật khẩu phải có ít nhất 1 kí tự in hoa");
+                } else if (!checkPassword[1]) {
+                    resolve("Mật khẩu phải có ít nhất 1 kí tự in thường");
+                } else if (!checkPassword[2]) {
+                    resolve("Mật khẩu phải có ít nhất 1 số");
+                } else
+                    resolve("");
+            }
+        } catch (e) {
+            reject(e);
+        }
+    });
+}
 
 let getAllUsers = (userId) => {
     return new Promise(async(resolve, reject) => {
@@ -106,11 +162,17 @@ let createNewUser = (data) => {
         try {
             // check phoneNumber is exist???
             let check = await checkPhoneNumber(data.phoneNumber);
-            if (check === true) {
+            let checkPasswordMessage = await checkPasswordFormat(data.password);
+            if (check.length !== 0) {
                 resolve({
                     errCode: 1,
-                    errMessage: "Số điện thoại này đã được đăng ký. Hãy dùng số khác",
+                    errMessage: check,
                 });
+            } else if (checkPasswordMessage.length !== 0) {
+                resolve({
+                    errCode: 2,
+                    errMessage: checkPasswordMessage,
+                })
             } else {
                 let hashPasswordFromBcrypt = await hashUserPassword(data.password);
                 await db.User.create({
@@ -155,7 +217,7 @@ let deleteUser = (userId) => {
     });
 };
 
-let updateUserData = (data) => {
+let updateUserInfo = (data) => {
     return new Promise(async(resolve, reject) => {
         try {
             if (!data.id) {
@@ -170,7 +232,8 @@ let updateUserData = (data) => {
                 });
                 if (user) {
                     user.fullName = data.fullName;
-                    user.address = data.address;
+                    user.email = data.email;
+                    user.birthday = data.birthday;
                     await user.save();
                     // await db.User.save({
                     //     firstname: data.firstName,
@@ -302,7 +365,7 @@ module.exports = {
     getAllUsers: getAllUsers,
     createNewUser: createNewUser,
     deleteUser: deleteUser,
-    updateUserData: updateUserData,
+    updateUserInfo: updateUserInfo,
     bookingTable: bookingTable,
     getAllOrders: getAllOrders,
 };

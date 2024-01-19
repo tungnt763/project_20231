@@ -3,23 +3,73 @@ import userService from "../services/userService";
 let handleLogin = async(req, res) => {
     let phoneNumber = req.body.phoneNumber;
     let password = req.body.password;
-
+    let checkPhoneNumber = true;
+    let numbers = /[0-9]/g;
+    for (let i = 0; i < phoneNumber.length; i++) {
+        if (!phoneNumber[i].match(numbers)) {
+            checkPhoneNumber = false;
+            break;
+        }
+    }
     if (!phoneNumber || !password) {
         return res.status(200).json({
             errCode: 1,
             message: "Hãy điền đủ các ô cần thiết",
         });
-    } else {
-        let userData = await userService.handleUserLogin(phoneNumber, password);
-        // check phoneNumber exist
-        // compare password
-        // return userInfo
-        // access_token: JWT
+    } else if (phoneNumber.length != 10 || !checkPhoneNumber) {
         return res.status(200).json({
-            errCode: userData.errCode,
-            message: userData.errMessage,
-            user: userData ? userData.user : {},
+            errCode: 8,
+            message: "Số điện thoại không đúng định dạng",
         });
+    } else {
+        if (password.length < 8) {
+            return res.status(200).json({
+                errCode: 4,
+                message: "Mật khẩu phải từ 8 kí tự trở lên",
+            })
+        } else {
+            let checkPassword = [false, false, false];
+            let upperCaseLetters = /[A-Z]/g,
+                lowerCaseLetters = /[a-z]/g,
+                numbers = /[0-9]/g;
+            for (let i = 0; i < password.length; i++) {
+                if (password[i].match(upperCaseLetters)) {
+                    checkPassword[0] = true;
+                    // break;
+                }
+                if (password[i].match(lowerCaseLetters)) {
+                    checkPassword[1] = true;
+                    // break;
+                }
+                if (password[i].match(numbers)) {
+                    checkPassword[2] = true;
+                    // break;
+                }
+            }
+            if (!checkPassword[0]) {
+                return res.status(200).json({
+                    errCode: 5,
+                    message: "Mật khẩu phải có ít nhất 1 kí tự in hoa",
+                })
+            } else if (!checkPassword[1]) {
+                return res.status(200).json({
+                    errCode: 6,
+                    message: "Mật khẩu phải có ít nhất 1 kí tự in thường",
+                })
+            } else if (!checkPassword[2]) {
+                return res.status(200).json({
+                    errCode: 7,
+                    message: "Mật khẩu phải có ít nhất 1 số",
+                })
+            } else {
+                let userData = await userService.handleUserLogin(phoneNumber, password);
+                return res.status(200).json({
+                    errCode: userData.errCode,
+                    message: userData.errMessage,
+                    user: userData ? userData.user : {},
+                });
+            }
+        }
     }
 };
 
@@ -58,9 +108,10 @@ let handleDeleteUser = async(req, res) => {
     return res.status(200).json(message);
 };
 
-let handleEditUser = async(req, res) => {
+let handleEditUserInfo = async(req, res) => {
     let data = req.body;
-    let message = await userService.updateUserData(data);
+    console.log(data);
+    let message = await userService.updateUserInfo(data);
     return res.status(200).json(message);
 };
 
@@ -104,7 +155,7 @@ module.exports = {
     handleLogin: handleLogin,
     handleGetAllUser: handleGetAllUser,
     handleCreateNewUser: handleCreateNewUser,
-    handleEditUser: handleEditUser,
+    handleEditUserInfo: handleEditUserInfo,
     handleDeleteUser: handleDeleteUser,
     handleBookingTable: handleBookingTable,
     handleGetAllOrder: handleGetAllOrder,
