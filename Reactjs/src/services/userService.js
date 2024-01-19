@@ -10,6 +10,11 @@ const getAllUsers = (id) => {
     return axios.get(`/api/get-all-users?id=${id}`, { id })
 }
 
+const getAllOrders = (id) => {
+    // template string
+    return axios.get(`/api/get-all-orders?id=${id}`, { id })
+}
+
 const createNewUserService = (data) => {
     return axios.post('/api/create-new-user', data)
 }
@@ -32,4 +37,4 @@ const bookingUserService = (info) => {
     return axios.post('/api/booking-table', info)
 }
 
-export { handleLoginApi, getAllUsers, createNewUserService, deleteUserService, editUserService, bookingUserService }
+export { handleLoginApi, getAllUsers, createNewUserService, deleteUserService, editUserService, bookingUserService, getAllOrders }

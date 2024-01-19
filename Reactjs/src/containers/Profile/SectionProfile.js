@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bookingUserService } from "../../services/userService";
 import "./SectionProfile.scss";
-import { getAllUsers } from "../../services/userService";
+import { getAllUsers, editUserService } from "../../services/userService";
+import MenuMyAccount from "./MenuMyAccount";
 
 class SectionProfile extends Component {
   constructor(props) {
@@ -27,6 +28,52 @@ class SectionProfile extends Component {
       });
     }
   };
+
+  doEditUserInfo = async(user) => {
+      try {
+          let res = await editUserService(user);
+          if (res && res.errCode === 0) {
+              await this.getAllUsersFromReact()
+          }
+          else {
+              alert(res.errCode)
+          }
+      } catch(e) {
+          console.log(e)
+      }
+  }
+
+  checkValidateInputInfo = () => {
+    let arrInput = ['email', 'fullName', 'birthday']
+    for (let i = 0; i < arrInput.length; i++) {
+        if (!this.state[arrInput[i]]) {
+            alert('Missing parameter: ' + arrInput[i]);
+            return false;
+        }
+    }
+    return true;
+  }
+
+  handleSaveUserInfo = () => {
+      let isValid = this.checkValidateInputInfo();
+      if (isValid) {
+          // call API edit user modal
+          this.doEditUserInfo(this.state);
+      }
+  }
+
+  handleOnChangeInput = (event, id) => {
+    // good code
+    console.log(new Date(event.target.value))
+    let copyState = {...this.state};
+    if (id != "birthday") copyState["user"][id] = event.target.value;
+    else 
+        copyState["user"][id] = new Date(event.target.value);
+    this.setState({
+        ...copyState
+    });
+  }
+
   render() {
     // this.componentDidMount();
     let user = this.state.user;
@@ -36,25 +83,7 @@ class SectionProfile extends Component {
         <section class="sectionProfile">
           <div class="container">
             <div class="content">
-              <div class="myAccount-nav">
-                <ul>
-                  <li class="link-user-information active-nav">
-                    <span class="material-symbols-outlined"> grid_view </span>
-                    <a>Chi Tiết Tài Khoản</a>
-                  </li>
-                  <li class="link-order-details">
-                    <span class="material-symbols-outlined">
-                      {" "}
-                      shopping_bag{" "}
-                    </span>
-                    <a>Đơn hàng</a>
-                  </li>
-                  <li class="link-exit">
-                    <span class="material-symbols-outlined"> logout </span>
-                    <a>Thoát</a>
-                  </li>
-                </ul>
-              </div>
+              <MenuMyAccount />
 
               <div class="myAccount-detail">
                 <h3 class="account-sub-title">Thông Tin Tài Khoản Chi Tiết</h3>
@@ -67,6 +96,7 @@ class SectionProfile extends Component {
                           type="text"
                           class="user-name"
                           value={user.fullName}
+                          onChange={(event) => {this.handleOnChangeInput(event, "fullName")}}
                           required
                         />
                         <label class="floating_label">Tên</label>
@@ -76,6 +106,7 @@ class SectionProfile extends Component {
                           type="text"
                           class="user_email"
                           value={user.email}
+                          onChange={(event) => {this.handleOnChangeInput(event, "email")}}
                           required
                         />
                         <label class="floating_label">Email</label>
@@ -85,6 +116,7 @@ class SectionProfile extends Component {
                           type="date"
                           class="user_birthday"
                           value={user.birthday}
+                          onChange={(event) => {this.handleOnChangeInput(event, "birthday")}}
                           required
                         />
                         <label class="label_birthday">Ngày sinh</label>

@@ -23,6 +23,10 @@ class HeaderOrder extends Component {
     console.log(localStorage.length);
   };
 
+  handleChooseUserOption = (id) => {
+    localStorage.setItem("idUserOption", id);
+  }
+
   render() {
     let userName = localStorage.getItem("userName");
     return (
@@ -83,12 +87,16 @@ class HeaderOrder extends Component {
                   <hr />
                   <a
                     href={"." + path.PROFILE}
+                    onClick={() => {this.handleChooseUserOption(1)}}
                     className="sub-menu-link user-information"
                   >
                     <i className="fas fa-user-edit"></i>
                     <p>Edit Profile</p>
                   </a>
-                  <a href="#" className="sub-menu-link user-order">
+                  <a 
+                    href={"." + path.ORDDETAIL} 
+                    onClick={() => {this.handleChooseUserOption(2)}}
+                    className="sub-menu-link user-order">
                     <i className="fas fa-shopping-cart"></i>
                     <p>Orders</p>
                   </a>

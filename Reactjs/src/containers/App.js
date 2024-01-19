@@ -24,6 +24,7 @@ import ConfirmModal from "../components/ConfirmModal";
 import HomePageBida from "./HomePageBida/HomePageBida.js";
 import OrderPageBida from "./OrderBida/OrderPageBida.js";
 import ProfilePageBida from "./Profile/ProfilePageBida.js";
+import OrderDetailPage from "./OrderDetail/OrderDetailPage.js";
 
 class App extends Component {
   // handleIsLoggedIn = (data) => {
@@ -68,30 +69,7 @@ class App extends Component {
                 <Route path={path.ORDER} component={OrderPageBida} />
                 <Route path={path.HOMEPAGE} component={HomePageBida} />
                 <Route path={path.PROFILE} component={ProfilePageBida} />
-                {/* <Route 
-                                    path={path.HOMEPAGE} 
-                                    render={() => <HomePageBida 
-                                        isLoggedInApp={this.state.isLoggedInApp} 
-                                        userName={this.state.userName} 
-                                        handleIsLoggedIn={this.handleIsLoggedIn}
-                                    />} 
-                                />
-                                <Route 
-                                    path={path.ORDER} 
-                                    render={() => <OrderPageBida 
-                                        isLoggedInApp={this.state.isLoggedInApp} 
-                                        userName={this.state.userName} 
-                                        handleIsLoggedIn={this.handleIsLoggedIn}
-                                    />} 
-                                /> 
-                                <Route 
-                                    path={path.PROFILE} 
-                                    render={() => <ProfilePageBida 
-                                        isLoggedInApp={this.state.isLoggedInApp} 
-                                        userName={this.state.userName} 
-                                        handleIsLoggedIn={this.handleIsLoggedIn}
-                                    />} 
-                                />*/}
+                <Route path={path.ORDDETAIL} component={OrderDetailPage} />
               </Switch>
             </span>
 

@@ -9,8 +9,8 @@ class SectionOrder extends Component {
         super(props);
 
         this.state = {
-            fullName: '',
-            phoneNumber: '',
+            fullName: localStorage.getItem("userName"),
+            phoneNumber: localStorage.getItem("phoneNumber"),
             isSelectedRoom: [false, false, false],
             typeOfRoom: -1,
             dateOfTime: [new Date(), new Date(new Date().getTime() + 24 * 60 * 60 * 1000), new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000)],
@@ -19,6 +19,8 @@ class SectionOrder extends Component {
             isSelectedTime: Array(15).fill(false),
             startTime: -1,
             endTime: -1,
+            priceRoom: [40000, 50000, 60000],
+            totalPrice: 0,
             address: ["", "1 Ngõ 72 Trần Đại Nghĩa", "47 Thái Hà, Trung Liệt", "352 Giải Phóng, Phương Liệt", "86 Ngõ Giếng, Hoàng Cầu", "269 Kim Ngưu, Hai Bà Trưng", "139 Lò Đúc, Hai Bà Trưng", "Số 1 Đại Cồ Việt"
             , "72 Lý Tự Trọng, Quận 1", "2864 Phạm Thế Hiển, Quận 8", "175b Cao Thắng, Quận 10", "7WM5+P8H, Trường Yên, Hoa Lư", "Cù Chính Lan, Nhật Tân", "23 Bàu Sen, Hòa Hiếu, TX. Thái Hòa", "433 Phủ Qùy, Hòa Hiếu, TX. Thái Hòa",
             "139 Đường 1/5 - TT, Nghĩa Đàn", "E-07, KPTM Vinpearl Hòn Tre, Phường Vĩnh Nguyên"],
@@ -44,6 +46,7 @@ class SectionOrder extends Component {
             copyState.dateBooking = '';
         }
         copyState.isSelectedTime = Array(15).fill(false);
+        copyState.totalPrice = 0;
         this.setState({
             ...copyState
         });
@@ -56,6 +59,7 @@ class SectionOrder extends Component {
         copyState.isSelectedDate[(id + 1) % 3] = false;
         copyState.isSelectedDate[(id + 2) % 3] = false;
         copyState.isSelectedTime = Array(15).fill(false);
+        copyState.totalPrice = 0;
         this.setState({
             ...copyState
         });
@@ -77,7 +81,9 @@ class SectionOrder extends Component {
                 if (i <= id) copyState.isSelectedTime[i] = true;
                 else 
                     copyState.isSelectedTime[i] = false;
+            copyState.endTime = (id < copyState.endTime ? id : copyState.endTime);
         }
+        copyState.totalPrice = copyState.priceRoom[copyState.typeOfRoom] * (copyState.endTime - copyState.startTime + 1);
         // console.log(copyState.startTime, copyState.endTime, copyState.isSelectedTime)
         this.setState({
             ...copyState
@@ -125,7 +131,7 @@ class SectionOrder extends Component {
                             <div>
                                 <div class="name-inf">
                                     <label>Họ tên *</label>
-                                    <input type="text" class="name-input" onChange={(event) => {this.handleOnChangeInput(event, "fullName")}} required aria-required="true" />
+                                    <input type="text" class="name-input" onChange={(event) => {this.handleOnChangeInput(event, "fullName")}} value={localStorage.getItem("userName")} required aria-required="true" />
                                 </div>
                                 <div class="div-extend-name"></div>
                             </div>
@@ -133,7 +139,7 @@ class SectionOrder extends Component {
                             <div>
                                 <div class="phone-inf">
                                     <label>Số điện thoại *</label>
-                                    <input type="tel" class="phone-input" onChange={(event) => {this.handleOnChangeInput(event, "phoneNumber")}}required aria-required="true"
+                                    <input type="tel" class="phone-input" onChange={(event) => {this.handleOnChangeInput(event, "phoneNumber")}} value={localStorage.getItem("phoneNumber")} required aria-required="true"
                                     title="Vui lòng nhập số điện thoại theo định dạng 10 số." />
                                 </div>
                                 <div class="div-extend-phone"></div>
@@ -150,28 +156,6 @@ class SectionOrder extends Component {
                                                     <option value={item}>{item}</option>
                                                 )
                                             })}
-                                            {/* <option value=""></option>
-                                            <option value="1 Ngõ 72 Trần Đại Nghĩa">1 Ngõ 72 Trần Đại Nghĩa, Hai Bà Trưng, Hà Nội</option>
-                                            <option value="47 Thái Hà, Trung Liệt">47 Thái Hà, Trung Liệt, Đống Đa, Hà Nội</option>
-                                            <option value="352 Giải Phóng, Phương Liệt">352 Giải Phóng,Phương Liệt, Thanh Xuân,Hà Nội</option>
-                                            <option value="86 Ngõ Giếng, Hoàng Cầu">86 Ngõ Giếng, Hoàng Cầu, Hà Nội</option>
-                                            <option value="269 Kim Ngưu, Hai Bà Trưng">269 Kim Ngưu, Hai Bà Trưng, Hà Nội</option>
-                                            <option value="139 Lò Đúc, Hai Bà Trưng">139 Lò Đúc, Hai Bà Trưng,Hà Nội</option>
-                                            <option value="Số 1 Đại Cồ Việt">Số 1 Đại Cồ Việt,Hai Bà Trưng, Hà Nội</option>
-                                            <option value="72 Lý Tự Trọng, Quận 1">72 Lý Tự Trọng, Quận 1, Thành phố Hồ Chí Minh</option>
-                                            <option value="2864 Phạm Thế Hiển, Quận 8">2864 Phạm Thế Hiển, Phường 7, Quận 8, Thành phố Hồ Chí Minh
-                                            </option>
-                                            <option value="175b Cao Thắng, Quận 10">175b Cao Thắng, Phường 12, Quận 10, Thành phố Hồ Chí Minh
-                                            </option>
-                                            <option value="7WM5+P8H, Trường Yên, Hoa Lư">7WM5+P8H, Trường Yên, Hoa Lư, Ninh Bình</option>
-                                            <option value="Cù Chính Lan, Nhật Tân">Cù Chính Lan, Nhật Tân, Ninh Bình</option>
-                                            <option value="23 Bàu Sen, Hòa Hiếu, TX. Thái Hòa">23 Bàu Sen, Hòa Hiếu, TX. Thái Hòa, Nghệ An
-                                            </option>
-                                            <option value="433 Phủ Qùy, Hòa Hiếu, TX. Thái Hòa">433 Phủ Qùy, Hòa Hiếu, TX. Thái Hòa, Nghệ An
-                                            </option>
-                                            <option value="139 Đường 1/5 - TT, Nghĩa Đàn">139 Đường 1/5 - TT, Nghĩa Đàn, Nghệ An</option>
-                                            <option value="E-07, KPTM Vinpearl Hòn Tre, Phường Vĩnh Nguyên">E-07, KPTM Vinpearl Hòn Tre, Phường
-                                                Vĩnh Nguyên, Tp. Nha Trang, Tỉnh Khánh Hoà</option> */}
                                         </select>
                                     </div>
                                 </div>
@@ -180,8 +164,8 @@ class SectionOrder extends Component {
                             <label class="room-label">Chọn Loại Phòng *</label>
                             <div>
                                 <div class="container-card">
-                                    <div class="cards first-price" onClick={() => {this.handleSelectedRoom(0)}}>
-                                        <img src="https://sanxuatbia.com/wp-content/uploads/2019/11/b5.jpg" alt="" />
+                                    <div class={!this.state.isSelectedRoom[0] ? "cards first-price" : "cards first-price active"} onClick={() => {this.handleSelectedRoom(0)}}>
+                                        <div class="img coban-img"></div>
                                         <div class="check">
                                             <i class="far fa-circle" hidden={this.state.isSelectedRoom[0]}></i>
                                             <i class="fas fa-check-circle" hidden={!this.state.isSelectedRoom[0]}></i>
@@ -193,8 +177,8 @@ class SectionOrder extends Component {
                                         </div>
                                     </div>
 
-                                    <div class="cards second-price" onClick={() => {this.handleSelectedRoom(1)}}>
-                                        <img src="https://sanxuatbia.com/wp-content/uploads/2019/11/b5.jpg" alt="" />
+                                    <div class={!this.state.isSelectedRoom[1] ? "cards second-price" : "cards second-price active"} onClick={() => {this.handleSelectedRoom(1)}}>
+                                        <div class="img chuyennghiep-img"></div>
                                         <div class="check">
                                             <i class="far fa-circle" hidden={this.state.isSelectedRoom[1]}></i>
                                             <i class="fas fa-check-circle" hidden={!this.state.isSelectedRoom[1]}></i>
@@ -206,8 +190,8 @@ class SectionOrder extends Component {
                                         </div>
                                     </div>
 
-                                    <div class="cards third-price" onClick={() => {this.handleSelectedRoom(2)}}>
-                                        <img src="https://sanxuatbia.com/wp-content/uploads/2019/11/b5.jpg" alt="" />
+                                    <div class={!this.state.isSelectedRoom[2] ? "cards third-price" : "cards third-price active"} onClick={() => {this.handleSelectedRoom(2)}}>
+                                        <div class="img dacbiet-img"></div>
                                         <div class="check">
                                             <i class="far fa-circle" hidden={this.state.isSelectedRoom[2]}></i>
                                             <i class="fas fa-check-circle" hidden={!this.state.isSelectedRoom[2]}></i>
@@ -223,7 +207,6 @@ class SectionOrder extends Component {
                             </div>
 
                             <label class="time-label" hidden={!this.state.isSelectedRoom[0] && !this.state.isSelectedRoom[1] && !this.state.isSelectedRoom[2]}>Thời gian *</label>
-
                             <div class="wrap-time" hidden={!this.state.isSelectedRoom[0] && !this.state.isSelectedRoom[1] && !this.state.isSelectedRoom[2]}>
                                 <ul class="tabs group">
                                     <li onClick={() => {this.handleSelectedDate(0)}}> 
@@ -241,16 +224,16 @@ class SectionOrder extends Component {
                                     <div id="one">
                                         { isSelectedTime.map((item, index) => {
                                             return (
-                                                !item ? <button onClick={() => {this.handleSelectedTime(index)}}>{(index + 8) + "h-" + (index + 9) + "h"}</button> : <button onClick={() => {this.handleSelectedTime(index)}} class="button-selected">{(index + 8) + "h-" + (index + 9) + "h"}</button>
+                                                !item ? <button class="buttonDay" disabled={this.state.isSelectedDate[0] && (index + 8) < this.state.dateOfTime[0].getHours() ? true : false} onClick={() => {this.handleSelectedTime(index)}}>{(index + 8) + "h-" + (index + 9) + "h"}</button> : <button onClick={() => {this.handleSelectedTime(index)}} class="button-selected">{(index + 8) + "h-" + (index + 9) + "h"}</button>
                                             )
                                         })}
                                     </div>
                                 </div>
                             </div>
                             <div class="div-time"></div>
-                            <div class="price">
+                            <div class="price" hidden={!this.state.isSelectedRoom[0] && !this.state.isSelectedRoom[1] && !this.state.isSelectedRoom[2]}>
                                 <label class="price-label">Giá tiền *</label>
-                                <input type="text" class="price-output" value="" />
+                                <input type="text" class="price-output" value={this.state.totalPrice + "đ"} />
                             </div>
                         </div>
                         <div class="check-inf">

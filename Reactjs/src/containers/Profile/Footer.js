@@ -51,18 +51,7 @@ class Footer extends Component {
             </div>
           </div>
         </section>
-
-        {/* <footer class="footer">
-          <div class="container">
-            <div class="year">BIDAHUST ra đời 09/11/2023</div>
-            <div class="icon-list">
-              <i class="bx bxl-facebook"></i>
-              <i class="bx bxl-instagram"></i>
-              <i class="bx bxl-youtube"></i>
-              <i class="bx bxl-tiktok"></i>
-            </div>
-          </div>
-        </footer> */}
+        <br/> <br/>
       </React.Fragment>
     );
   }

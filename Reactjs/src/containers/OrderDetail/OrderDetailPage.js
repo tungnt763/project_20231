@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./OrderPageBida.scss";
-import HeaderOrder from "./HeaderOrder";
-import HeaderBida from "../HomePageBida/HeaderBida";
-import SectionOrder from "./SectionOrder";
+import "./OrderDetailPage.scss";
+import HeaderOrder from "../OrderBida/HeaderOrder";
+import DetailTable from "./DetailTable";
+import Footer from "../Profile/Footer";
 
-class OrderPageBida extends Component {
+class OrderDetailPage extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
+    console.log(this.props);
   }
 
   componentDidMount() {}
@@ -16,12 +18,9 @@ class OrderPageBida extends Component {
     return (
       <React.Fragment>
         <div className="div-body">
-          {!localStorage.getItem("userName") ? (
-            <HeaderBida />
-          ) : (
             <HeaderOrder />
-          )}
-          <SectionOrder />
+            <DetailTable />
+            <Footer />
         </div>
       </React.Fragment>
     );
@@ -38,4 +37,4 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderPageBida);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderDetailPage);

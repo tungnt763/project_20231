@@ -19,14 +19,7 @@ class ProfilePageBida extends Component {
     return (
       <React.Fragment>
         <div className="div-body">
-          {!localStorage.getItem("userName") ? (
-            <HeaderBida
-              isHiddenLogin={this.state.isHiddenLogin}
-              showLoginRegister={this.showLoginRegister}
-            />
-          ) : (
-            <HeaderOrder />
-          )}
+          <HeaderOrder />
           <SectionProfile />
           <Footer />
         </div>

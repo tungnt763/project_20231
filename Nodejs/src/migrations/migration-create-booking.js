@@ -27,6 +27,9 @@ module.exports = {
             address: {
                 type: Sequelize.STRING
             },
+            totalPrice: {
+                type: Sequelize.INTEGER
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE

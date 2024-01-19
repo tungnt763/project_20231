@@ -71,6 +71,7 @@ class LoginWrapper extends Component {
         // this.props.handleIsLoggedInHomePage(data);
         // console.log(this.props);
         localStorage.setItem("userName", data.user.fullName);
+        localStorage.setItem("phoneNumber", data.user.phoneNumber);
         localStorage.setItem("id", data.user.id);
         // console.log(localStorage.getItem("id"));
         this.handleHideLoginRegister();

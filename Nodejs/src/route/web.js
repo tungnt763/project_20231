@@ -19,6 +19,7 @@ let initWebRoutes = (app) => {
     router.put('/api/edit-user', userController.handleEditUser);
     router.delete('/api/delete-user', userController.handleDeleteUser); // restAPI
     router.post('/api/booking-table', userController.handleBookingTable);
+    router.get('/api/get-all-orders', userController.handleGetAllOrder);
 
     // res api -> muon lay data thi dung method get
     // muon tao data thi dung method post

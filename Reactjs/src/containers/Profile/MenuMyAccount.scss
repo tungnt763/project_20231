@@ -1,0 +1,44 @@
+.myAccount-nav ul {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    border: 1px solid var(--primary-orange);
+}
+
+.myAccount-nav ul li {
+    padding: 24px 0 24px 20px;
+    border-bottom: 1px solid var(--primary-orange);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.myAccount-nav ul li span {
+    font-size: 26px;
+}
+
+.myAccount-nav ul li a {
+    font-size: 16px;
+}
+
+.myAccount-nav {
+    ul {
+        li {
+            color: #ffffff;
+        }
+    }
+}
+
+.active-nav {
+    background-color: var(--primary-orange);
+}
+
+.active-nav span {
+    color: #141414;
+}
+
+.active-nav a {
+    color: #141414;
+    font-weight: bold;
+}

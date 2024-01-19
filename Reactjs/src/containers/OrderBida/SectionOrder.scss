@@ -137,7 +137,11 @@
     align-items: center;
     gap: 20px;
     justify-content: center;
-    display: none;
+    // display: none;
+    .price-label {
+        margin-left: 5px;
+        margin-right: -55px;
+    }
 }
 
 .open-price {
@@ -256,11 +260,32 @@
     border: 1px solid #FFF;
 }
 
-.container-card img {
+.container-card .img {
     height: 400px;
     width: 377px;
     border-radius: 15px;
     transition: 0.5s;
+}
+
+.container-card .coban-img {
+    background: url("../../assets/images/co_ban.jpg");
+    background-repeat: no-repeat;
+    background-size: auto 400px;
+    background-position: center;
+}
+
+.container-card .chuyennghiep-img {
+    background: url("../../assets/images/chuyennghiep.jpg");
+    background-repeat: no-repeat;
+    background-size: auto 400px;
+    background-position: center;
+}
+
+.container-card .dacbiet-img {
+    background: url("../../assets/images/dacbiet.jpg");
+    background-repeat: no-repeat;
+    background-size: auto 400px;
+    background-position: center;
 }
 
 .intro {
@@ -505,7 +530,7 @@ button:hover,
     color: #000;
 }
 
-.buttonDay1:disabled {
+.buttonDay:disabled {
     cursor: not-allowed;
     opacity: 0.5;
     pointer-events: none;

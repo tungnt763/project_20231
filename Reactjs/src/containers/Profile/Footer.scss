@@ -1,88 +1,99 @@
-.header-logo a { 
+.header-logo a {
     font-family: 'Agbalumo';
     font-size: 32px;
     color: #FFBA00;
     font-weight: 600;
-  }
-  .header-logo a span {
-    color: red;
-  }
-  .header-logo a .span3 {
-    color: rgb(0, 90, 168);
-  }
-  .header-logo a .span2 {
-    color: rgb(0, 168, 90);
-  }
-  .header-logo a .span1 {
-    color: rgb(255, 255, 255);
-  }
+}
 
-.section2{
+.header-logo a span {
+    color: red;
+}
+
+.header-logo a .span3 {
+    color: rgb(0, 90, 168);
+}
+
+.header-logo a .span2 {
+    color: rgb(0, 168, 90);
+}
+
+.header-logo a .span1 {
+    color: rgb(255, 255, 255);
+}
+
+.section2 {
     background-color: #1C1C1C;
     display: flex;
     flex-wrap: wrap;
-    justify-content:center ;
+    justify-content: center;
     align-items: center;
-    padding: 30px 100px 10px 100px; 
+    padding: 30px 0 10px 0;
     gap: 60px;
-  }
-  .col {
+}
+
+.col {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-   margin-bottom: 20px; 
-  }
-  .col h3,
-  .col-register h3
-  {
-    width: 420px; 
+    margin-bottom: 20px;
+    margin-left: 60px;
+}
+
+.col h3,
+.col-register h3 {
+    width: 420px;
     margin-bottom: 20px;
     color: #e2e2e2;
-  }
-  .col h4 {
+}
+
+.col h4 {
     width: 420px;
     margin-bottom: 20px;
     color: #e2e2e2;
     font-weight: 500;
-    font-size: 15px;
-  }
-  .col-register h4{
+    font-size: 17px;
+}
+
+.col-register h4 {
     width: 420px;
     margin-bottom: 20px;
     color: #e2e2e2;
     font-weight: 500;
-    font-size: 15px;
-  }
-  .col .logo{
+    font-size: 17px;
+}
+
+.col .logo {
     width: 180px;
     margin-bottom: 20px;
-  }
-  
-  .col-register{
+}
+
+.col-register {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-   margin-bottom: 20px; 
-  }
-  .col-register h3 {
+    margin-bottom: 20px;
+}
+
+.col-register h3 {
     color: #FFBA00;
-  }
-  .col-register .email-receive-inf{
+}
+
+.col-register .email-receive-inf {
     background-color: transparent;
     padding: 10px 10px 10px 5px;
     border: 2px solid #FFBA00;
     border-radius: 2px;
     margin-top: 10px;
-    width: 150%;  
+    width: 150%;
     color: #FFBA00;
     outline: none;
-  }
-  .email-receive-inf::placeholder{
+}
+
+.email-receive-inf::placeholder {
     color: #FFBA00;
     font-size: 14px;
-    
-  }
-  .email-receive-inf:focus{
+}
+
+.email-receive-inf:focus {
     border: 2px solid #FFBA00;
-  
-  }
+}
