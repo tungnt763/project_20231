@@ -25,7 +25,7 @@ class HeaderOrder extends Component {
 
   handleChooseUserOption = (id) => {
     localStorage.setItem("idUserOption", id);
-  }
+  };
 
   render() {
     let userName = localStorage.getItem("userName");
@@ -46,13 +46,13 @@ class HeaderOrder extends Component {
                   <a href={"." + path.ORDER}>Đặt bàn</a>
                 </li>
                 <li className="sparkle u-hover--sparkle">
-                  <a href="./location.html">Địa điểm</a>
+                  <a href={"." + path.LOCATION}>Địa điểm</a>
                 </li>
                 <li className="sparkle u-hover--sparkle">
                   <a href="#">Loại bàn</a>
                 </li>
                 <li className="sparkle u-hover--sparkle">
-                  <a href="./news.html">Tin tức</a>
+                  <a href={"." + path.NEWS}>Tin tức</a>
                 </li>
                 <li className="sparkle u-hover--sparkle">
                   <a href="#">Sự kiện</a>
@@ -87,16 +87,21 @@ class HeaderOrder extends Component {
                   <hr />
                   <a
                     href={"." + path.PROFILE}
-                    onClick={() => {this.handleChooseUserOption(1)}}
+                    onClick={() => {
+                      this.handleChooseUserOption(1);
+                    }}
                     className="sub-menu-link user-information"
                   >
                     <i className="fas fa-user-edit"></i>
                     <p>Edit Profile</p>
                   </a>
-                  <a 
-                    href={"." + path.ORDDETAIL} 
-                    onClick={() => {this.handleChooseUserOption(2)}}
-                    className="sub-menu-link user-order">
+                  <a
+                    href={"." + path.ORDDETAIL}
+                    onClick={() => {
+                      this.handleChooseUserOption(2);
+                    }}
+                    className="sub-menu-link user-order"
+                  >
                     <i className="fas fa-shopping-cart"></i>
                     <p>Orders</p>
                   </a>
