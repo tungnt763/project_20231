@@ -110,10 +110,17 @@ let handleDeleteUser = async(req, res) => {
 
 let handleEditUserInfo = async(req, res) => {
     let data = req.body;
-    console.log(data);
+    // console.log(data);
     let message = await userService.updateUserInfo(data);
     return res.status(200).json(message);
 };
+
+let handleEditPassword = async(req, res) => {
+    let data = req.body;
+    // console.log(data);
+    let message = await userService.updatePassword(data);
+    return res.status(200).json(message);
+}
 
 let handleBookingTable = async(req, res) => {
     let typeOfRoom = req.body.typeOfRoom;
@@ -159,4 +166,5 @@ module.exports = {
     handleDeleteUser: handleDeleteUser,
     handleBookingTable: handleBookingTable,
     handleGetAllOrder: handleGetAllOrder,
+    handleEditPassword: handleEditPassword,
 };

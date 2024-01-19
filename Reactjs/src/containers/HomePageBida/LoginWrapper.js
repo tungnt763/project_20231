@@ -63,9 +63,10 @@ class LoginWrapper extends Component {
         this.state.password
       );
       if (data && data.errCode !== 0) {
-        this.setState({
-          errMessage: data.message,
-        });
+        // this.setState({
+        //   errMessage: data.message,
+        // });
+        alert(data.message);
       } else if (data && data.errCode === 0) {
         //todo
         // this.props.handleIsLoggedInHomePage(data);
@@ -142,12 +143,12 @@ class LoginWrapper extends Component {
               </div>
               <div className="remember-forgot">
                 <label>
-                  <input type="checkbox" name="" id="" />
+                  <input type="checkbox" name="" id=""/>
                   Remember me
                 </label>
                 <a href="#">Bạn quên mật khẩu?</a>
               </div>
-              <div className="errMessage">{this.state.errMessage}</div>
+              {/* <div className="errMessage">{this.state.errMessage}</div> */}
               <Link to={path.HOMEPAGE}>
                 <button
                   type="submit"

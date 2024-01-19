@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bookingUserService } from '../../services/userService';
 import './SectionOrder.scss';
+import { path } from '../../utils/constant';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 class SectionOrder extends Component {
 
@@ -110,6 +112,19 @@ class SectionOrder extends Component {
     handleBookingTable = async () => {
         let message = await bookingUserService(this.state);
         alert(message.errMessage);
+        if (message.errCode == 0) {
+            this.setState({
+                isSelectedRoom: [false, false, false],
+                typeOfRoom: -1,
+                dateBooking: '',
+                isSelectedDate: [false, false, false],
+                isSelectedTime: Array(15).fill(false),
+                startTime: -1,
+                endTime: -1,
+                totalPrice: 0,
+                addressSelected: "",
+            })
+        }
         // console.log(message);
     }
 

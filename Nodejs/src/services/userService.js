@@ -217,6 +217,21 @@ let deleteUser = (userId) => {
     });
 };
 
+let checkEmailFormat = (email) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            let filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if (!filter.test(email)) {
+                resolve("Hay nhap dia chi email hop le.\nExample@gmail.com");
+            } else {
+                resolve("");
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 let updateUserInfo = (data) => {
     return new Promise(async(resolve, reject) => {
         try {
@@ -226,30 +241,39 @@ let updateUserInfo = (data) => {
                     errMessage: "Missing required parameter!",
                 });
             } else {
-                let user = await db.User.findOne({
-                    where: { id: data.id },
-                    raw: false,
-                });
-                if (user) {
-                    user.fullName = data.fullName;
-                    user.email = data.email;
-                    user.birthday = data.birthday;
-                    await user.save();
-                    // await db.User.save({
-                    //     firstname: data.firstName,
-                    //     lastname: data.lastName,
-                    //     address: data.address,
-                    // })
-
+                let checkEmail = await checkEmailFormat(data.email);
+                // console.log(checkEmail);
+                if (checkEmail.length !== 0) {
                     resolve({
-                        errCode: 0,
-                        message: "Update the user succeeds!",
-                    });
+                        errCode: 3,
+                        errMessage: checkEmail,
+                    })
                 } else {
-                    resolve({
-                        errCode: 1,
-                        errMessage: "User not found",
+                    let user = await db.User.findOne({
+                        where: { id: data.id },
+                        raw: false,
                     });
+                    if (user) {
+                        user.fullName = data.fullName;
+                        user.email = data.email;
+                        user.birthday = data.birthday;
+                        await user.save();
+                        // await db.User.save({
+                        //     firstname: data.firstName,
+                        //     lastname: data.lastName,
+                        //     address: data.address,
+                        // })
+
+                        resolve({
+                            errCode: 0,
+                            errMessage: "Update the user succeeds!",
+                        });
+                    } else {
+                        resolve({
+                            errCode: 1,
+                            errMessage: "User not found",
+                        });
+                    }
                 }
             }
         } catch (e) {
@@ -257,6 +281,61 @@ let updateUserInfo = (data) => {
         }
     });
 };
+
+let checkOldPassword = (userId, oldPassword) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            let user = await db.User.findOne({
+                attributes: ["password"],
+                where: { id: userId },
+                raw: true,
+            });
+            let check = await bcrypt.compareSync(oldPassword, user.password);
+            if (!check) {
+                resolve("Nhập sai mật khẩu");
+            } else {
+                resolve("");
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let updatePassword = (data) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            let checkOld = await checkOldPassword(data.id, data.oldPassword);
+            if (checkOld.length !== 0) {
+                resolve({
+                    errCode: 1,
+                    errMessage: checkOld,
+                })
+            } else {
+                let checkNew = await checkPasswordFormat(data.newPassword);
+                if (checkNew.length !== 0) {
+                    resolve({
+                        errCode: 2,
+                        errMessage: checkNew,
+                    })
+                } else {
+                    let user = await db.User.findOne({
+                        where: { id: data.id },
+                        raw: false,
+                    });
+                    user.password = await hashUserPassword(data.newPassword);
+                    await user.save();
+                    resolve({
+                        errCode: 0,
+                        errMessage: "Thay đổi mật khẩu thành công",
+                    })
+                }
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
 
 let checkBooking = (data) => {
     return new Promise(async(resolve, reject) => {
@@ -368,4 +447,5 @@ module.exports = {
     updateUserInfo: updateUserInfo,
     bookingTable: bookingTable,
     getAllOrders: getAllOrders,
+    updatePassword: updatePassword,
 };

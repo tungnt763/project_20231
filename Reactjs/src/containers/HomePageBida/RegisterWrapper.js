@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './LoginWrapper.scss';
 import { emitter } from '../../utils/emitter';
+import { path } from '../../utils/constant'; 
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 class RegisterWrapper extends Component {
     constructor(props) {
@@ -133,17 +135,20 @@ class RegisterWrapper extends Component {
                                         name="" 
                                         id="" 
                                         onClick={() => {this.handleCommit()}}
+                                        checked={this.state.isCommited}
                                     />
                                     Đồng ý với điều khoản dịch vụ của chúng tôi
                                 </label>
                             </div>
-                            <button 
-                                type="submit" 
-                                class="login-btn" 
-                                onClick={() => {this.handleAddNewUser()}}
-                            >
-                                Đăng ký
-                            </button>
+                            <Link to={path.HOMEPAGE}>
+                                <button 
+                                    type="submit" 
+                                    class="login-btn" 
+                                    onClick={() => {this.handleAddNewUser()}}
+                                >
+                                    Đăng ký
+                                </button>
+                            </Link>
                             <div class="login-register">
                                 <p>Bạn đã có tài khoản?</p>
                                 <a href="#" class="register-link login-link" onClick={() => this.handleShowLoginRegister()}>Đăng nhập</a>

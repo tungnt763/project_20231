@@ -10,7 +10,12 @@ class HeaderBida extends Component {
   }
 
   handleShowLoginRegister = () => {
-    this.props.showLoginRegister();
+    if (Object.keys(this.props).length != 1) {
+      this.props.showLoginRegister();
+    }
+    else {
+      alert("Hãy đăng nhập để đặt bàn");
+    }
   };
 
   handleNavigateOrder = () => {
@@ -34,16 +39,15 @@ class HeaderBida extends Component {
             <div className="header-nav">
               <ul>
                 <li className="sparkle u-hover--sparkle">
-                  <a
-                    href={
-                      localStorage.getItem("userName") ? "." + path.ORDER : "#"
-                    }
-                    onClick={() => {
-                      this.handleNavigateOrder();
-                    }}
-                  >
-                    Đặt bàn
-                  </a>
+                  <Link to={localStorage.getItem("userName") ? path.ORDER : path.HOMEPAGE}>
+                    <div
+                      onClick={() => {
+                        this.handleNavigateOrder();
+                      }}
+                    >
+                      Đặt bàn
+                    </div>
+                  </Link>
                 </li>
                 <li className="sparkle u-hover--sparkle">
                   <a href={"." + path.LOCATION}>Địa điểm</a>

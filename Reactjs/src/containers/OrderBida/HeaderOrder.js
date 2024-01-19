@@ -19,7 +19,7 @@ class HeaderOrder extends Component {
   };
 
   handleLogout = () => {
-    localStorage.removeItem("userName");
+    localStorage.clear();
     console.log(localStorage.length);
   };
 

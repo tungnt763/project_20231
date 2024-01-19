@@ -19,6 +19,7 @@ import { emitter } from "../../utils/emitter";
 import HeaderOrder from "../OrderBida/HeaderOrder";
 import { path } from "../../utils";
 import { Link } from "react-router-dom/cjs/react-router-dom";
+import Footer from "../Profile/Footer";
 
 class HomePageBida extends Component {
   constructor(props) {
@@ -57,7 +58,7 @@ class HomePageBida extends Component {
   createNewUser = async (data) => {
     try {
       let response = await createNewUserService(data);
-      console.log(response);
+      // console.log(response);
       if (response && response.errCode !== 0) {
         alert(response.errMessage);
       } else {
@@ -67,6 +68,12 @@ class HomePageBida extends Component {
       console.log(e);
     }
   };
+
+  handleOrderNow = () => {
+    if (!localStorage.getItem("id")) {
+      this.showLoginRegister();
+    }
+  }
 
   render() {
     console.log(localStorage);
@@ -86,10 +93,10 @@ class HomePageBida extends Component {
             <div class="home-content">
               <div class="home-content-desc" hidden={this.state.isHiddenHome}>
                 <h1>
-                  <span class="translate">Ethereum</span>
+                  <span class="translate">BidaHUST</span>
                 </h1>
-                <Link to={path.ORDER}>
-                  <div class="btn btn-login">
+                <Link to={localStorage.getItem("id") ? path.ORDER : path.HOMEPAGE}>
+                  <div class="btn btn-login" onClick={() => this.handleOrderNow()}>
                     <p>ĐẶT NGAY</p>
                     <span class="BorderTopBottom"></span>
                     <span class="BorderLeftRight"></span>
@@ -115,6 +122,7 @@ class HomePageBida extends Component {
         <AboutBida />
         <PlaceBida />
         <NewFeedBida />
+        <Footer />
       </div>
     );
   }
