@@ -40,6 +40,7 @@ class SectionProfile extends Component {
           if (res && res.errCode === 0) {
               await this.getAllUsersFromReact();
               alert("Cập nhật thông tin thành công");
+              localStorage.setItem("userName", user.fullName);
           }
           else {
               alert(res.errMessage);

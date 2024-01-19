@@ -1,4 +1,4 @@
-.what-here {
+.what-here-home {
     background: url("https://warningzone.com/wp-content/plugins/warningzone/assets/images/heading-bg.jpg") repeat-x;
     display: inline-block;
     position: relative;
@@ -10,13 +10,13 @@
     margin-bottom: 10px;
 }
 
-.what-here h3 {
+.what-here-home h3 {
     font-size: 20px;
     color: #212020;
     font-weight: 600;
 }
 
-.what-here .dot-before {
+.what-here-home .dot-before {
     position: absolute;
     content: '';
     background: #000000;
@@ -27,7 +27,7 @@
     border-radius: 50%;
 }
 
-.what-here .dot-after {
+.what-here-home .dot-after {
     position: absolute;
     content: '';
     background: #000000;
@@ -38,30 +38,35 @@
     border-radius: 50%;
 }
 
-.new-feeds {
+.new-feeds-home {
     padding: 140px 140px 100px;
     background-color: #000000;
 }
 
-.new-feeds-container .new-img {
-    width: 360px;
+.new-feeds-container-home .new-img {
+    width: auto;
     margin-bottom: 16px;
 }
 
-.new-feeds-sss {
+.new-feeds-sss-home {
     display: flex;
     align-items: center;
     gap: 20px;
-    padding: 50px;
+    // padding: 50px;
 }
 
-.new-feeds-sss .new-feeds-date {
+.new-feeds-sss-home .new-feeds-date-home {
     color: #FFBA00;
     font-size: 12px;
     margin-bottom: 12px;
 }
 
-.new-feeds-content h3 {
+.new-feeds-content-home {
+    display: flex;
+    flex-direction: column;
+}
+
+.new-feeds-content-home h3 {
     color: #FFBA00;
     font-weight: 600;
     cursor: pointer;
