@@ -58,6 +58,11 @@ class LoginWrapper extends Component {
       errMessage: "",
     });
     try {
+      // if (
+      //   this.state.phoneNumber === "0123456789" &&
+      //   this.state.password === "Admin123"
+      // ) {
+      // }
       let data = await handleLoginApi(
         this.state.phoneNumber,
         this.state.password
@@ -143,7 +148,7 @@ class LoginWrapper extends Component {
               </div>
               <div className="remember-forgot">
                 <label>
-                  <input type="checkbox" name="" id=""/>
+                  <input type="checkbox" name="" id="" />
                   Remember me
                 </label>
                 <a href="#">Bạn quên mật khẩu?</a>

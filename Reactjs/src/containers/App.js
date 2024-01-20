@@ -27,7 +27,7 @@ import ProfilePageBida from "./Profile/ProfilePageBida.js";
 import OrderDetailPage from "./OrderDetail/OrderDetailPage.js";
 import LocationPageBida from "./Location/LocationPageBida.js";
 import NewsPageBida from "./News/NewsPageBida.js";
-import UserManage from "./System/UserManage.js";
+import AdminPageBida from "./Admin/AdminPageSite.js";
 
 class App extends Component {
   // handleIsLoggedIn = (data) => {
@@ -75,7 +75,7 @@ class App extends Component {
                 <Route path={path.ORDDETAIL} component={OrderDetailPage} />
                 <Route path={path.LOCATION} component={LocationPageBida} />
                 <Route path={path.NEWS} component={NewsPageBida} />
-                <Route path={path.ADMIN} component={UserManage} />
+                <Route path={path.ADMIN} component={AdminPageBida} />
               </Switch>
             </span>
 

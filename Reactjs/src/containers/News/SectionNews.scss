@@ -60,6 +60,9 @@
 }
 .new-feeds-content {
     text-align: left;
+    flex-direction: column;
+    /* justify-content: left; */
+    display: flex;
 }
 .news-container-content  {
     display: grid;
