@@ -79,6 +79,7 @@ class LoginWrapper extends Component {
         localStorage.setItem("userName", data.user.fullName);
         localStorage.setItem("phoneNumber", data.user.phoneNumber);
         localStorage.setItem("id", data.user.id);
+        localStorage.setItem("roleId", data.user.roleId);
         // console.log(localStorage.getItem("id"));
         this.handleHideLoginRegister();
       }

@@ -20,6 +20,7 @@ import HeaderOrder from "../OrderBida/HeaderOrder";
 import { path } from "../../utils";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import Footer from "../Profile/Footer";
+import HeaderAdmin from "../Admin/HeaderAdmin";
 
 class HomePageBida extends Component {
   constructor(props) {
@@ -73,7 +74,7 @@ class HomePageBida extends Component {
     if (!localStorage.getItem("id")) {
       this.showLoginRegister();
     }
-  }
+  };
 
   render() {
     console.log(localStorage);
@@ -84,10 +85,11 @@ class HomePageBida extends Component {
             isHiddenLogin={this.state.isHiddenLogin}
             showLoginRegister={this.showLoginRegister}
           />
-        ) : (
+        ) : localStorage.getItem("roleId") == 1 ? (
           <HeaderOrder />
+        ) : (
+          <HeaderAdmin />
         )}
-
         <div class="home">
           <div class="home-img">
             <div class="home-content">
@@ -95,8 +97,13 @@ class HomePageBida extends Component {
                 <h1>
                   <span class="translate">BidaHUST</span>
                 </h1>
-                <Link to={localStorage.getItem("id") ? path.ORDER : path.HOMEPAGE}>
-                  <div class="btn btn-login" onClick={() => this.handleOrderNow()}>
+                <Link
+                  to={localStorage.getItem("id") ? path.ORDER : path.HOMEPAGE}
+                >
+                  <div
+                    class="btn btn-login"
+                    onClick={() => this.handleOrderNow()}
+                  >
                     <p>ĐẶT NGAY</p>
                     <span class="BorderTopBottom"></span>
                     <span class="BorderLeftRight"></span>

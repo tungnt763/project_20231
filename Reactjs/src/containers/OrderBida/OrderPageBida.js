@@ -16,11 +16,7 @@ class OrderPageBida extends Component {
     return (
       <React.Fragment>
         <div className="div-body">
-          {!localStorage.getItem("userName") ? (
-            <HeaderBida />
-          ) : (
-            <HeaderOrder />
-          )}
+          {!localStorage.getItem("userName") ? <HeaderBida /> : <HeaderOrder />}
           <SectionOrder />
         </div>
       </React.Fragment>

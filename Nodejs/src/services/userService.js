@@ -25,7 +25,7 @@ let handleUserLogin = (phoneNumber, password) => {
         // compare password
 
         let user = await db.User.findOne({
-          attributes: ["phoneNumber", "fullName", "password", "id"],
+          attributes: ["phoneNumber", "fullName", "password", "id", "roleId"],
           where: { phoneNumber: phoneNumber },
           raw: true,
         });
@@ -179,7 +179,7 @@ let createNewUser = (data) => {
           password: hashPasswordFromBcrypt,
           fullName: data.fullName,
           address: data.address,
-          roleId: data.roleId,
+          roleId: 1,
         });
         resolve({
           errCode: 0,

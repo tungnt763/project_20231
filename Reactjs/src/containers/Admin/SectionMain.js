@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./SectionMain.scss";
-
+import { path } from "../../utils";
+import { Link } from "react-router-dom";
 class SectionMain extends Component {
   constructor(props) {
     super(props);
@@ -13,31 +14,33 @@ class SectionMain extends Component {
     return (
       <React.Fragment>
         <div className="div-body">
-          <div class="navcontainer">
-            <nav class="nav">
-              <div class="nav-upper-options">
-                <div
-                  class="nav-option option1"
-                  onClick={this.props.setUserList}
-                >
-                  <h3> Users List</h3>
-                </div>
-
-                <div
-                  class="option2 nav-option"
-                  onClick={this.props.setBookingList}
-                >
-                  <h3> Orders List</h3>
-                </div>
-
-                <div
-                  class="nav-option option3"
-                  onClick={this.props.setRoomList}
-                >
-                  <h3> Rooms List</h3>
-                </div>
-              </div>
-            </nav>
+          <div className="option-container">
+            <div className="header-logo">
+              <Link to={path.HOMEPAGE}>
+                B<span className="span1">I</span>D
+                <span className="span2">A</span> H<span>U</span>S
+                <span className="span3">T</span>
+              </Link>
+            </div>
+            <div className="options">
+              <ul>
+                <li className="sparkle u-hover--sparkle">
+                  <a href="#" onClick={this.props.setUserList}>
+                    Người dùng
+                  </a>
+                </li>
+                <li className="sparkle u-hover--sparkle">
+                  <a href="#" onClick={this.props.setBookingList}>
+                    Đơn đặt bàn
+                  </a>
+                </li>
+                <li className="sparkle u-hover--sparkle">
+                  <a href="#" onClick={this.props.setRoomList}>
+                    Phòng
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </React.Fragment>

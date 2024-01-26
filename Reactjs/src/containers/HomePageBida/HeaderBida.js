@@ -58,7 +58,7 @@ class HeaderBida extends Component {
                   <a href={"." + path.LOCATION}>Địa điểm</a>
                 </li>
                 <li className="sparkle u-hover--sparkle">
-                  <a href={"." + path.ADMIN}>Loại bàn</a>
+                  <a href="#">Loại bàn</a>
                 </li>
                 <li className="sparkle u-hover--sparkle">
                   <a href={"." + path.NEWS}>Tin tức</a>
