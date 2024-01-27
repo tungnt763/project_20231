@@ -461,6 +461,38 @@ let getAllRoom = () => {
   });
 };
 
+let addRoom = (data) => {
+  return new Promise(async (resolve, reject) => {
+    // console.log(data);
+    let room = await db.Room_Branch.findOne({
+      where: {
+        typeOfRoom: data.typeOfRoom,
+        address: data.address,
+      },
+      raw: false,
+    });
+    // console.log(room);
+    if (room) {
+      let sum = parseInt(room.numberOfRoom) + parseInt(data.numberOfRoom);
+      // console.log(sum);
+      room.numberOfRoom = sum;
+      // console.log(room.numberOfRoom);
+      // room.numberOfRoom += data.numberOfRoom;
+      await room.save();
+    } else {
+      await db.Room_Branch.create({
+        typeOfRoom: data.typeOfRoom,
+        address: data.address,
+        numberOfRoom: data.numberOfRoom,
+      });
+    }
+    resolve({
+      errCode: 0,
+      errMessage: "Thêm phòng thành công",
+    });
+  });
+};
+
 module.exports = {
   handleUserLogin: handleUserLogin,
   getAllUsers: getAllUsers,
@@ -471,4 +503,5 @@ module.exports = {
   getAllOrders: getAllOrders,
   updatePassword: updatePassword,
   getAllRoom: getAllRoom,
+  addRoom: addRoom,
 };

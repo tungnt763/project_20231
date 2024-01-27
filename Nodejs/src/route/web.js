@@ -23,6 +23,7 @@ let initWebRoutes = (app) => {
   router.post("/api/booking-table", userController.handleBookingTable);
   router.get("/api/get-all-orders", userController.handleGetAllOrder);
   router.get("/api/get-all-rooms", userController.handleGetAllRoom);
+  router.post("/api/add-room", userController.handleAddRoom);
 
   // res api -> muon lay data thi dung method get
   // muon tao data thi dung method post

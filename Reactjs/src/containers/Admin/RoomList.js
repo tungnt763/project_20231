@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./RoomList.scss";
+import AddRoom from "./AddRoom";
+
 import {
   getAllUsers,
   deleteUserService,
@@ -36,43 +38,46 @@ class RoomList extends Component {
     console.log(arrRooms);
     return (
       <React.Fragment>
-        <div className="user-table mt-3 mx-1">
-          <table id="customers">
-            <tbody>
-              <tr>
-                <th>Loại phòng</th>
-                <th>Chi nhánh</th>
-                <th>Giá tiền</th>
-                <th>Số phòng</th>
-              </tr>
-              {/* like for loop */}
+        <div className="room-container">
+          <div className="user-table mt-3 mx-1">
+            <table id="customers">
+              <tbody>
+                <tr>
+                  <th>Loại phòng</th>
+                  <th>Chi nhánh</th>
+                  <th>Giá tiền</th>
+                  <th>Số phòng</th>
+                </tr>
+                {/* like for loop */}
 
-              {arrRooms &&
-                arrRooms.map((item, index) => {
-                  return (
-                    <tr>
-                      <td>
-                        {item.typeOfRoom == 0
-                          ? "Phòng Cơ Bản"
-                          : item.typeOfRoom == 1
-                          ? "Phòng Chuyên Nghiệp"
-                          : "Phòng Đặc Biệt"}
-                      </td>
+                {arrRooms &&
+                  arrRooms.map((item, index) => {
+                    return (
+                      <tr>
+                        <td>
+                          {item.typeOfRoom == 0
+                            ? "Phòng Cơ Bản"
+                            : item.typeOfRoom == 1
+                            ? "Phòng Chuyên Nghiệp"
+                            : "Phòng Đặc Biệt"}
+                        </td>
 
-                      <td>{item.address}</td>
-                      <td>
-                        {item.typeOfRoom == 0
-                          ? "40.000đ"
-                          : item.typeOfRoom == 1
-                          ? "50.000đ"
-                          : "60.000đ"}
-                      </td>
-                      <td>{item.numberOfRoom}</td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
+                        <td>{item.address}</td>
+                        <td>
+                          {item.typeOfRoom == 0
+                            ? "40.000đ"
+                            : item.typeOfRoom == 1
+                            ? "50.000đ"
+                            : "60.000đ"}
+                        </td>
+                        <td>{item.numberOfRoom}</td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </div>
+          <AddRoom />
         </div>
       </React.Fragment>
     );

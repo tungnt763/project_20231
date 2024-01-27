@@ -23,6 +23,10 @@ const createNewUserService = (data) => {
   return axios.post("/api/create-new-user", data);
 };
 
+const addRoom = (data) => {
+  return axios.post("/api/add-room", data);
+};
+
 const deleteUserService = (userId) => {
   // return axios.delete('/api/delete-user', { id })
   return axios.delete("/api/delete-user", {
@@ -62,4 +66,5 @@ export {
   getAllOrders,
   editPasswordService,
   getAllRooms,
+  addRoom,
 };

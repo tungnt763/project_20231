@@ -167,6 +167,11 @@ let handleGetAllRoom = async (req, res) => {
   });
 };
 
+let handleAddRoom = async (req, res) => {
+  let message = await userService.addRoom(req.body);
+  return res.status(200).json(message);
+};
+
 module.exports = {
   handleLogin: handleLogin,
   handleGetAllUser: handleGetAllUser,
@@ -177,4 +182,5 @@ module.exports = {
   handleGetAllOrder: handleGetAllOrder,
   handleEditPassword: handleEditPassword,
   handleGetAllRoom: handleGetAllRoom,
+  handleAddRoom: handleAddRoom,
 };

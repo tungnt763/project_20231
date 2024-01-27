@@ -1,0 +1,98 @@
+.types-select{
+    padding: 10px 5px;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 8px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 0.5px solid #FFBA00;
+    color: var(--primary-orange);
+    outline: none;
+    cursor: pointer;
+    width: 95%;
+    font-size: 17px;
+    width: 800px;
+    margin-left: 20px;
+}
+.type-info{
+    display: flex;
+    align-items: center;
+    grid-gap: 10px;
+    gap: 20px;
+}
+.address-info{
+    display: flex;
+    align-items: center;
+    grid-gap: 10px;
+    gap: 20px;
+}
+.number-info{
+    display: flex;
+    align-items: center;
+    grid-gap: 10px;
+    gap: 20px;
+}
+.room-form label{
+    color: #FFBA00;
+    font-size: 18px;
+    font-weight: 600;
+    width: 100px;
+    text-align: left;
+    margin-left: 20px;
+}
+.address-select{
+    padding: 10px 5px;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 8px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 0.5px solid #FFBA00;
+    color: var(--primary-orange);
+    outline: none;
+    cursor: pointer;
+    width: 95%;
+    font-size: 17px;
+    width: 800px;
+    margin-left: 20px;
+}
+
+.number-input{
+    margin-top: 8px;
+    padding: 10px 5px;
+    font-size: 17px;
+    font-weight: 500;
+    width: 55%;
+    outline: none;
+    background-color: transparent;
+    border: none;
+    border-bottom: 0.5px solid #FFBA00;
+    color: var(--primary-orange);
+    width: 800px;
+    margin-left: 20px;
+}
+
+.room-form{
+    position: fixed;
+}
+.submit-btn{
+    color: #FFBA00 !important;
+    background: transparent !important;
+    border: 2px solid #FFBA00 !important;
+    border-radius: 2px !important;
+    transition: 0.5s !important;
+    cursor: pointer !important;
+    font-size: 18px !important;
+    width: 150px;
+    margin-left: 20px;
+}
+
+.types-select option{
+    color: var(--primary-orange);
+    background: #3a3a3a;
+}
+
+.address-select option{
+    color: var(--primary-orange);
+    background: #3a3a3a;
+}
